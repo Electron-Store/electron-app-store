@@ -1,0 +1,63 @@
+<template>
+  <div class="page app_page flex">
+    <div class="app_details pa10 h-100">
+      <div class="flex flex-col center-a gap20 mb10">
+        <img :src="app.icon" />
+        <h1>{{ app.name }}</h1>
+        <p class="text-align-center">
+          {{ app.description }}
+        </p>
+      </div>
+      <div class="flex center-a">
+        <button id="instal_bt" class="pt10 pb10 w-90 round20">
+          <h3>Install</h3>
+        </button>
+      </div>
+      <div class="metas">
+        <div v-for="meta in app.meta" :key="meta.title" class="app_meta ma10">
+          <strong class="mb5"> {{ meta.title }} </strong>
+          <p>{{ meta.data }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="app_readme h-100 scroll_y">
+      <div v-html="app.readme"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState({
+      app: (state) => state.selectedApp,
+    }),
+  },
+};
+</script>
+
+<style lang="scss">
+.app_details {
+  width: 30%;
+  background: white;
+  img {
+    width: 70px;
+  }
+}
+.app_readme {
+  width: 69.5%;
+  padding: 20px;
+  margin-left: 5px;
+  background: white;
+}
+#instal_bt {
+  background: #22afff;
+  cursor: pointer;
+  color: white;
+  h3 {
+    font-size: 1.1rem;
+  }
+}
+</style>
