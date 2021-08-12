@@ -1,9 +1,21 @@
 <template>
   <div id="menu" class="scroll_y">
-    <ul>
+    <ul id="categories_list" class="scroll_y pos-rel">
+      <li
+        :class="[$route.name == 'explore' ? 'selected' : '', 'flex gap10 pa10']"
+        @click="$router.push('/')"
+      >
+        <img src="@/assets/images/home.svg" alt="home icon" />
+        <p>Explore</p>
+      </li>
+      <div id="c_title_area" class="flex pos-sticky top0 left0 w-100 pa10">
+        <h4>Categories</h4>
+      </div>
       <li
         :class="[
-          selectedCategory === category.name ? 'selected' : '',
+          selectedCategory === category.name && $route.name != 'explore'
+            ? 'selected'
+            : '',
           'flex gap10 pa10',
         ]"
         v-for="category in categories"
@@ -63,6 +75,13 @@ export default {
   transition: 0.2s ease-in-out;
   &:hover {
     width: 190px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.253);
+    #c_title_area {
+      opacity: 1;
+    }
+    #categories_list {
+      width: 100%;
+    }
   }
   ul {
     list-style-type: none;
@@ -78,7 +97,7 @@ export default {
     }
   }
   .selected {
-    background: #ced1fb;
+    background: #22aeff9d;
   }
   ::-webkit-scrollbar {
     background: rgba(0, 0, 0, 0);
@@ -91,5 +110,14 @@ export default {
   ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.384);
   }
+}
+#categories_list {
+  height: 85%;
+  width: 105%;
+}
+#c_title_area {
+  background: white;
+  opacity: 0;
+  // box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.089);
 }
 </style>

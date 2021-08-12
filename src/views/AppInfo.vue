@@ -1,5 +1,10 @@
 <template>
   <div class="page app_page flex">
+    <download-modal
+      v-if="releaseInfo"
+      v-on:closeModal="releaseInfo = null"
+      :files="releaseInfo.files"
+    />
     <div class="app_details pa10 h-100">
       <div class="flex flex-col center-a gap20 mb10">
         <img :src="app.icon" />
@@ -9,7 +14,12 @@
         </p>
       </div>
       <div class="flex center-a">
-        <button id="instal_bt" class="pt10 pb10 w-90 round20">
+        <button
+          v-if="app.latestRelease"
+          id="instal_bt"
+          @click="releaseInfo = app.latestRelease"
+          class="pt10 pb10 w-90 round20"
+        >
           <h3>Install</h3>
         </button>
       </div>
@@ -29,11 +39,18 @@
 
 <script>
 import { mapState } from "vuex";
+import downloadModal from "../components/download-modal.vue";
 export default {
+  components: { downloadModal },
   computed: {
     ...mapState({
       app: (state) => state.selectedApp,
     }),
+  },
+  data() {
+    return {
+      releaseInfo: null,
+    };
   },
 };
 </script>

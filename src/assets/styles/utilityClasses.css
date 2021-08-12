@@ -34,10 +34,10 @@
 .flex-col {
   flex-direction: column;
 }
-.flex.center-v {
+.center-v {
   align-items: center;
 }
-.flex.center-h {
+.center-h {
   justify-content: center;
 }
 .flex-col.center-h {
@@ -437,7 +437,9 @@
 .pos-abs {
   position: absolute;
 }
-
+.pos-sticky{
+  position: sticky;
+}
 .abs-center-y {
   position: absolute;
   top: 50%;

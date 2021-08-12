@@ -1,18 +1,23 @@
 <template>
   <div id="app">
     <loading v-if="loading" />
+    <app-header />
     <base-menu />
     <router-view />
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
+import AppHeader from "./components/app-header.vue";
 import BaseMenu from "./components/base-menu.vue";
 import Loading from "./components/loading.vue";
 export default {
-  components: { BaseMenu, Loading },
+  components: { BaseMenu, Loading, AppHeader },
   computed: {
     ...mapState(["loading"]),
+  },
+  mounted() {
+    this.$router.replace("/");
   },
 };
 </script>
@@ -23,13 +28,12 @@ export default {
 ::-webkit-scrollbar {
   background: rgba(0, 0, 0, 0);
   width: 0px;
-  height: 6px;
 }
 ::-webkit-scrollbar-track-piece {
   background: #ededed;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.384);
+  background: rgba(0, 0, 0, 0);
 }
 * {
   margin: 0;
@@ -44,5 +48,8 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+}
+#app {
+  padding-left: 45px;
 }
 </style>

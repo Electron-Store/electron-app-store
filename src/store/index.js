@@ -7,6 +7,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		exploreFeed: [
+			{
+				title: "Featured",
+				apps: [],
+			},
+		],
 		selectedCategory: {
 			name: "Explore",
 			apps: [],
@@ -17,6 +23,12 @@ export default new Vuex.Store({
 		loading: false,
 	},
 	mutations: {
+		async getExploreFeed(state) {
+			state.loading = true;
+			state.exploreFeed = await createRequest("explore-feed");
+			console.log(state.exploreFeed);
+			state.loading = false;
+		},
 		async selectCategory(state, payload) {
 			if (state.cache.has(payload)) {
 				state.selectedCategory = state.cache.get(payload);
@@ -32,8 +44,9 @@ export default new Vuex.Store({
 				state.cache.set(state.selectedCategory.name, state.selectedCategory);
 				console.log(state.selectedCategory);
 			}
-			router.back();
-			// router.replace("/");
+			if (router.currentRoute.fullPath !== "/category") {
+				router.push("/category");
+			}
 		},
 		async selectApp(state, payload) {
 			console.log(payload);
@@ -42,16 +55,23 @@ export default new Vuex.Store({
 				"get-app",
 				toQueryString({ appID: payload })
 			);
+			console.log(state.selectedApp);
 			router.push("/appPage");
 			state.loading = false;
 		},
 		async searchApp(state, payload) {
+			state.loading = true;
 			state.searchResults = await createRequest(
 				"search-app",
 				toQueryString({
 					query: payload,
 				})
 			);
+			console.log(state.searchResults);
+			state.loading = false;
+			if (router.currentRoute.fullPath !== "/searchPage") {
+				router.push("/searchPage");
+			}
 		},
 	},
 	actions: {},

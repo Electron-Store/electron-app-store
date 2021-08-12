@@ -7,56 +7,45 @@
         id="sliver_bg"
       />
       <div class="sliver_title pos-abs bottom0 pa10 w-100">
-        <h2>{{ category.name }}</h2>
+        <h2>Explore</h2>
       </div>
     </div>
     <div class="page_body scroll_y">
-      <div class="flex_auto">
-        <app-card v-for="app in category.apps" :app="app" :key="app.id" />
+      <div class="feed_box mt10" v-for="feed in feeds" :key="feed.title">
+        <h2 class="ml10">{{ feed.title }}</h2>
+        <div class="flex_auto">
+          <app-card v-for="app in feed.apps" :app="app" :key="app.id" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import AppCard from "../components/app-card.vue";
 export default {
   name: "Category",
   computed: {
     ...mapState({
-      category: (state) => state.selectedCategory,
+      feeds: (state) => state.exploreFeed,
     }),
   },
+  methods: {
+    ...mapMutations(["getExploreFeed"]),
+  },
   components: { AppCard },
+  mounted() {
+    this.getExploreFeed();
+    console.log("exploring");
+  },
 };
 </script>
 
 <style lang="scss">
-.page {
-  width: 99.5%;
-  height: 100vh;
-}
-.category_page {
-  height: 100vh;
-  overflow: hidden;
-  border-radius: 10px 10px 0px 0px;
-}
-.page_sliver {
-  height: 30%;
-  #sliver_bg {
-    z-index: -1;
-  }
+.feed_box {
   h2 {
-    color: white;
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
-}
-.page_body {
-  height: 63%;
-  background: white;
-}
-.sliver_title {
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.479));
 }
 </style>
