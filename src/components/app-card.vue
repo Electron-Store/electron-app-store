@@ -1,7 +1,7 @@
 <template>
   <div
     @click="selectApp(app.id)"
-    class="app-card pa10 flex gap10 center-v ma10"
+    class="app-card pa10 flex gap10 center-v ma10 round20 animate fadeInUp"
   >
     <img :src="app.logo" />
     <div class="card_content flex_between flex-col">
@@ -26,10 +26,11 @@ export default {
 <style lang="scss">
 .app-card {
   cursor: pointer;
-  width: 307px;
+  width: 23.4%;
   overflow: hidden;
+  transition: 0.2s ease-in-out;
   &:hover {
-    background: rgb(233, 233, 233);
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.137);
   }
   img {
     height: 50px;

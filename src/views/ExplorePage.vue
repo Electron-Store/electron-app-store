@@ -1,16 +1,21 @@
 <template>
-  <div class="category_page page">
-    <div class="page_sliver no_scroll pos-rel">
+  <div
+    :class="[
+      shrinkContainer ? 'shrink_container' : '',
+      'category_page page scroll_y pos-rel',
+    ]"
+  >
+    <div class="image_sliver left0 w-100 pos-sticky">
       <img
-        src="https://pxfnmafyqvdhzxosxcqw.supabase.in/storage/v1/object/public/images/illustrations/productivity.png"
-        class="pos-abs top0 left0 w-100"
+        src="https://pxfnmafyqvdhzxosxcqw.supabase.in/storage/v1/object/public/images/illustrations/explore-min.jpg"
+        class="pos-abs w-100 top0 left0"
         id="sliver_bg"
       />
       <div class="sliver_title pos-abs bottom0 pa10 w-100">
         <h2>Explore</h2>
       </div>
     </div>
-    <div class="page_body scroll_y">
+    <div class="page_body">
       <div class="feed_box mt10" v-for="feed in feeds" :key="feed.title">
         <h2 class="ml10">{{ feed.title }}</h2>
         <div class="flex_auto">
@@ -29,6 +34,7 @@ export default {
   computed: {
     ...mapState({
       feeds: (state) => state.exploreFeed,
+      shrinkContainer: (state) => state.showDownloadWidget,
     }),
   },
   methods: {

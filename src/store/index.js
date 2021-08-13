@@ -21,6 +21,7 @@ export default new Vuex.Store({
 		searchResults: null,
 		cache: new Map(),
 		loading: false,
+		showDownloadWidget: false,
 	},
 	mutations: {
 		async getExploreFeed(state) {
@@ -72,6 +73,9 @@ export default new Vuex.Store({
 			if (router.currentRoute.fullPath !== "/searchPage") {
 				router.push("/searchPage");
 			}
+		},
+		toggleDownloadWidget(state) {
+			state.showDownloadWidget = !state.showDownloadWidget;
 		},
 	},
 	actions: {},

@@ -1,16 +1,21 @@
 <template>
-  <div class="category_page page">
-    <div class="page_sliver no_scroll pos-rel">
+  <div
+    :class="[
+      shrinkContainer ? 'shrink_container' : '',
+      'category_page page scroll_y pos-rel',
+    ]"
+  >
+    <div class="image_sliver left0 w-100 pos-sticky">
       <img
-        src="https://pxfnmafyqvdhzxosxcqw.supabase.in/storage/v1/object/public/images/illustrations/productivity.png"
-        class="pos-abs top0 left0 w-100"
+        :src="category.illustration"
+        class="pos-abs w-100 top0 left0"
         id="sliver_bg"
       />
       <div class="sliver_title pos-abs bottom0 pa10 w-100">
         <h2>{{ category.name }}</h2>
       </div>
     </div>
-    <div class="page_body scroll_y">
+    <div class="page_body">
       <div class="flex_auto">
         <app-card v-for="app in category.apps" :app="app" :key="app.id" />
       </div>
@@ -26,6 +31,7 @@ export default {
   computed: {
     ...mapState({
       category: (state) => state.selectedCategory,
+      shrinkContainer: (state) => state.showDownloadWidget,
     }),
   },
   components: { AppCard },
@@ -33,30 +39,45 @@ export default {
 </script>
 
 <style lang="scss">
+.shrink_container {
+  width: 70.5% !important;
+}
 .page {
-  width: 99.5%;
-  height: 100vh;
+  width: 93%;
+  height: 91vh;
+  position: absolute;
+  left: 80px;
+  transition: 0.2s ease-in-out;
 }
 .category_page {
-  height: 100vh;
-  overflow: hidden;
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.253);
+  background: white;
 }
 .page_sliver {
-  height: 30%;
-  #sliver_bg {
-    z-index: -1;
-  }
+  height: 40%;
   h2 {
     color: white;
     font-size: 2rem;
   }
 }
+.image_sliver {
+  z-index: 1;
+  top: -200px;
+  height: 250px;
+  overflow: hidden;
+  img {
+    transform: translateY(-30%);
+  }
+  // margin-bottom: -640px;
+}
 .page_body {
-  height: 63%;
-  background: white;
+  // height: 53%;
 }
 .sliver_title {
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.479));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.212));
+  h2 {
+    color: white;
+  }
 }
 </style>

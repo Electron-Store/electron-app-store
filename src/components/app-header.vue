@@ -1,5 +1,10 @@
 <template>
-  <header class="flex_between mb5 center-v">
+  <header
+    :class="[
+      showDownloadWidget ? 'shrink_container' : '',
+      'flex_between round10 center-v pos-abs top5',
+    ]"
+  >
     <button id="back_bt" @click="goBack">
       <img
         v-if="$route.name != 'explore'"
@@ -23,22 +28,34 @@
         alt="search icon"
       />
     </div>
-    <button id="dls_bt">
-      <img src="@/assets/images/download.svg" alt="back icon" />
+    <button
+      :class="[showDownloadWidget ? 'selected' : '']"
+      id="dls_bt"
+      @click="toggleDownloadWidget"
+    >
+      <img
+        v-if="!showDownloadWidget"
+        src="@/assets/images/download.svg"
+        alt="back icon"
+      />
+      <img v-else src="@/assets/images/x.svg" alt="back icon" />
     </button>
   </header>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
       query: "",
     };
   },
+  computed: {
+    ...mapState(["showDownloadWidget"]),
+  },
   methods: {
-    ...mapMutations(["searchApp"]),
+    ...mapMutations(["searchApp", "toggleDownloadWidget"]),
     goBack() {
       this.$router.back();
     },
@@ -52,14 +69,18 @@ export default {
 <style lang="scss">
 header {
   background: white;
-  width: 99.5%;
+  width: 93%;
   overflow: hidden;
   border-radius: 0px 0px 10px 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.253);
+  left: 80px;
+  z-index: 2;
+  transition: 0.2s ease-in-out;
   button {
     background: white;
     cursor: pointer;
     padding: 5px 8px;
-    &:hover {
+    &:hover:not(.selected) {
       background: rgb(240, 240, 240);
     }
     img {

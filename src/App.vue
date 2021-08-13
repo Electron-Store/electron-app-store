@@ -3,26 +3,49 @@
     <loading v-if="loading" />
     <app-header />
     <base-menu />
-    <router-view />
+    <splash v-if="showSplash" />
+    <transition
+      enter-active-class="animate slideInUp"
+      leave-active-class="animate slideOutUp"
+    >
+      <router-view />
+    </transition>
+    <transition
+      enter-active-class="animate slideInRight faster"
+      leave-active-class="animate slideOutRight faster"
+    >
+      <download-widget v-if="showDownloadWidget" />
+    </transition>
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
 import AppHeader from "./components/app-header.vue";
 import BaseMenu from "./components/base-menu.vue";
+import DownloadWidget from "./components/downloadWidget.vue";
 import Loading from "./components/loading.vue";
+import Splash from "./components/splash.vue";
 export default {
-  components: { BaseMenu, Loading, AppHeader },
+  data() {
+    return {
+      showSplash: true,
+    };
+  },
+  components: { BaseMenu, Loading, AppHeader, Splash, DownloadWidget },
   computed: {
-    ...mapState(["loading"]),
+    ...mapState(["loading", "showDownloadWidget"]),
   },
   mounted() {
     this.$router.replace("/");
+    setTimeout(() => {
+      this.showSplash = false;
+    }, 4000);
   },
 };
 </script>
 <style lang="scss">
 @import url("./assets/styles/utilityClasses.css");
+@import url("./assets/styles/animate.css");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 ::-webkit-scrollbar {
@@ -50,6 +73,9 @@ body {
   overflow: hidden;
 }
 #app {
-  padding-left: 45px;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 10px;
+  padding-top: 50px;
 }
 </style>

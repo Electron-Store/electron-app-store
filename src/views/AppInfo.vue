@@ -5,7 +5,7 @@
       v-on:closeModal="releaseInfo = null"
       :files="releaseInfo.files"
     />
-    <div class="app_details pa10 h-100">
+    <div class="app_details pa10 h-100 round15 flex_between flex-col">
       <div class="flex flex-col center-a gap20 mb10">
         <img :src="app.icon" />
         <h1>{{ app.name }}</h1>
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="app_readme h-100 scroll_y">
+    <div class="app_readme h-100 scroll_y round15">
       <div v-html="app.readme"></div>
     </div>
   </div>

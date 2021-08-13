@@ -1,10 +1,13 @@
 "use strict";
 
-import { app, protocol, screen, BrowserWindow } from "electron";
+import { app, protocol, screen, BrowserWindow, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+const { DownloaderHelper } = require("node-downloader-helper");
 const isDevelopment = process.env.NODE_ENV !== "production";
+const path = require("path");
 
-// Scheme must be registered before the app is ready
+const downloadFolder = path.join(require("os").homedir(), "Downloads");
+
 protocol.registerSchemesAsPrivileged([
 	{ scheme: "app", privileges: { secure: true, standard: true } },
 ]);
@@ -68,3 +71,12 @@ if (isDevelopment) {
 		});
 	}
 }
+
+const downloads = [];
+
+ipcMain.on("downloadFile", (e, fileURL) => {
+	const dl = new DownloaderHelper(fileURL, downloadFolder);
+	downloads.push(dl);
+	dl.on("end", () => console.log("Download Completed"));
+	dl.start();
+});

@@ -23,7 +23,7 @@
 export default {
   computed: {
     releaseFiles() {
-      return this.files.filter((file) => file.name.includes(".yml"));
+      return this.files.filter((file) => !file.name.includes(".yml"));
     },
   },
   props: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="search_page page">
+  <div class="search_page page round20">
     <div class="flex center-a w-100 pt5">
       <h3>{{ query }}: Search Results</h3>
     </div>
@@ -37,5 +37,6 @@ export default {
 <style lang="scss">
 .search_page {
   background: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.253);
 }
 </style>
