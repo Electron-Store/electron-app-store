@@ -20,7 +20,7 @@
           @click="releaseInfo = app.latestRelease"
           class="pt10 pb10 w-90 round20"
         >
-          <h3>Install</h3>
+          <h3>Download</h3>
         </button>
       </div>
       <div class="metas">

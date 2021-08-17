@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <loading v-if="loading" />
+    <!-- <loading v-if="loading" /> -->
     <app-header />
     <base-menu />
     <splash v-if="showSplash" />
@@ -19,7 +19,8 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { ipcRenderer } from "electron";
+import { mapMutations, mapState } from "vuex";
 import AppHeader from "./components/app-header.vue";
 import BaseMenu from "./components/base-menu.vue";
 import DownloadWidget from "./components/downloadWidget.vue";
@@ -35,17 +36,26 @@ export default {
   computed: {
     ...mapState(["loading", "showDownloadWidget"]),
   },
+  methods: {
+    ...mapMutations(["updateDownload", "updateDownloadState"]),
+  },
   mounted() {
-    this.$router.replace("/");
     setTimeout(() => {
       this.showSplash = false;
     }, 4000);
+    ipcRenderer.on("updateDownload", (e, payload) => {
+      this.updateDownload(payload);
+    });
+    ipcRenderer.on("updateDownloadState", (e, payload) => {
+      this.updateDownloadState(payload);
+    });
   },
 };
 </script>
 <style lang="scss">
 @import url("./assets/styles/utilityClasses.css");
 @import url("./assets/styles/animate.css");
+@import url("./assets/styles/component.css");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 ::-webkit-scrollbar {

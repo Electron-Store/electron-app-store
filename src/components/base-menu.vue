@@ -32,10 +32,10 @@
     </ul>
     <li
       :class="[
-        $route.name == 'settings' ? 'selected' : '',
+        $route.name == 'settingsPage' ? 'selected' : '',
         'flex pos-abs bottom0 gap10 pa10',
       ]"
-      @click="$router.push('/settings')"
+      @click="$router.push('/settingsPage')"
       id="settingsBt"
     >
       <img src="@/assets/images/settings.svg" alt="home icon" />

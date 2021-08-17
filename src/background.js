@@ -3,6 +3,7 @@
 import { app, protocol, screen, BrowserWindow, ipcMain } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 const { DownloaderHelper } = require("node-downloader-helper");
+import settings from "electron-settings";
 const isDevelopment = process.env.NODE_ENV !== "production";
 const path = require("path");
 
@@ -11,10 +12,11 @@ const downloadFolder = path.join(require("os").homedir(), "Downloads");
 protocol.registerSchemesAsPrivileged([
 	{ scheme: "app", privileges: { secure: true, standard: true } },
 ]);
+var win;
 
 async function createWindow() {
 	// Create the browser window.
-	const win = new BrowserWindow({
+	win = new BrowserWindow({
 		width: screen.getPrimaryDisplay().bounds.width,
 		height: screen.getPrimaryDisplay().bounds.height,
 		webPreferences: {
@@ -72,11 +74,92 @@ if (isDevelopment) {
 	}
 }
 
-const downloads = [];
+ipcMain.on("setSetting",(e,payload)=>{
+	await settings.set(payload.name,payload.value)
+})
 
-ipcMain.on("downloadFile", (e, fileURL) => {
-	const dl = new DownloaderHelper(fileURL, downloadFolder);
-	downloads.push(dl);
-	dl.on("end", () => console.log("Download Completed"));
+const downloads = new Map();
+
+ipcMain.on("downloadFile", (e, download) => {
+	console.log(download);
+	const dl = new DownloaderHelper(download.url, downloadFolder);
+	downloads.set(download.id, {
+		...download,
+		dl,
+	});
+	setUpDownload(dl, download.id);
 	dl.start();
 });
+
+ipcMain.on("retry", (e, id) => {
+	console.log("Retrying");
+	const url = downloads.get(id).url;
+	const dl = new DownloaderHelper(url, downloadFolder);
+	setUpDownload(dl, id);
+	dl.start();
+	win.webContents.send("updateDownload", {
+		id,
+		percent: 0,
+		fileSize: 0,
+		state: "Downloading",
+	});
+});
+
+ipcMain.on("cancel", (e, id) => {
+	console.log("Canceling");
+	const dl = downloads.get(id).dl;
+	dl.stop();
+	win.webContents.send("updateDownload", {
+		id,
+		percent: 0,
+		fileSize: 0,
+		state: "Canceled",
+	});
+});
+
+ipcMain.on("pause", (e, id) => {
+	console.log("Pausing");
+	const dl = downloads.get(id).dl;
+	dl.pause();
+	win.webContents.send("updateDownloadState", { id, state: "Paused" });
+});
+
+ipcMain.on("resume", (e, id) => {
+	console.log("Resuming");
+	const dl = downloads.get(id).dl;
+	dl.resume();
+	win.webContents.send("updateDownloadState", { id, state: "Downloading" });
+});
+
+function bytesTopMb(bytes) {
+	return Math.floor(bytes / 1000000);
+}
+
+function setUpDownload(dlObject, id) {
+	dlObject.on("error", (info) => {
+		console.log("Download Error");
+		console.log(info);
+		win.webContents.send("updateDownload", {
+			id,
+			percent: 0,
+			fileSize: 0,
+			state: "Canceled",
+		});
+	});
+	dlObject.on("end", (info) => {
+		console.log("Download Completed");
+		console.log(info);
+	});
+	dlObject.on("progress", (stats) => {
+		const percent = Math.floor(stats.progress);
+		const fileSize = bytesTopMb(stats.total);
+		const state = "Downloading";
+		console.log("downloading");
+		win.webContents.send("updateDownload", {
+			id,
+			percent,
+			fileSize,
+			state,
+		});
+	});
+}

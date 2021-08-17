@@ -22,6 +22,17 @@ export default new Vuex.Store({
 		cache: new Map(),
 		loading: false,
 		showDownloadWidget: false,
+		downloads: [],
+		settings: [
+			{
+				name: "Dark Mode",
+				value: false,
+			},
+			{
+				name: "Downloads Folder",
+				value: "---",
+			},
+		],
 	},
 	mutations: {
 		async getExploreFeed(state) {
@@ -76,6 +87,19 @@ export default new Vuex.Store({
 		},
 		toggleDownloadWidget(state) {
 			state.showDownloadWidget = !state.showDownloadWidget;
+		},
+		addToDownloads(state, payload) {
+			state.downloads.push(payload);
+		},
+		updateDownload(state, payload) {
+			const index = state.downloads.findIndex((d) => d.id === payload.id);
+			state.downloads[index].fileSize = payload.fileSize;
+			state.downloads[index].percent = payload.percent;
+			state.downloads[index].state = payload.state;
+		},
+		updateDownloadState(state, payload) {
+			const index = state.downloads.findIndex((d) => d.id === payload.id);
+			state.downloads[index].state = payload.state;
 		},
 	},
 	actions: {},

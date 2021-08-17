@@ -11,6 +11,7 @@
           :key="file.name"
           id="instal_bt"
           class="pt5 pb5 pl10 pr10 round5"
+          @click="addToDownloadField(file)"
         >
           <h3>{{ file.name }}</h3>
         </button>
@@ -20,20 +21,35 @@
 </template>
 
 <script>
+import { ipcRenderer } from "electron";
+import { mapMutations } from "vuex";
 export default {
   computed: {
     releaseFiles() {
-      return this.files.filter((file) => !file.name.includes(".yml"));
+      return this.files;
     },
   },
   props: {
     files: Array,
   },
   methods: {
+    ...mapMutations(["addToDownloads"]),
     closeModal(e) {
       if (e.target.classList.contains("modal")) {
         this.$emit("closeModal");
       }
+    },
+    addToDownloadField(file) {
+      const newDownload = {
+        id: Date(),
+        url: file.src,
+        name: file.name,
+        percent: 0,
+        fileSize: "0mb",
+        state: "Starting",
+      };
+      this.addToDownloads(newDownload);
+      ipcRenderer.send("downloadFile", newDownload);
     },
   },
 };

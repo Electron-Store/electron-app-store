@@ -47,12 +47,12 @@ export default {
   height: 91vh;
   position: absolute;
   left: 80px;
+  background: white;
   transition: 0.2s ease-in-out;
+  border-radius: 20px;
 }
 .category_page {
-  border-radius: 20px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.253);
-  background: white;
 }
 .page_sliver {
   height: 40%;

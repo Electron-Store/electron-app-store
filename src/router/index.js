@@ -4,6 +4,7 @@ import ExplorePage from "../views/ExplorePage.vue";
 import Category from "../views/Category.vue";
 import AppInfo from "../views/AppInfo.vue";
 import SearchResults from "../views/SearchResults.vue";
+import Settings from "../views/Settings.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
 		path: "/searchPage",
 		name: "searchPage",
 		component: SearchResults,
+	},
+	{
+		path: "/settingsPage",
+		name: "settingsPage",
+		component: Settings,
 	},
 ];
 
