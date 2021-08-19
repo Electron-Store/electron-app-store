@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div :class="[settings.darkMode ? 'darkMode' : '', 'app']" id="app">
     <!-- <loading v-if="loading" /> -->
     <app-header />
     <base-menu />
@@ -34,10 +34,15 @@ export default {
   },
   components: { BaseMenu, Loading, AppHeader, Splash, DownloadWidget },
   computed: {
-    ...mapState(["loading", "showDownloadWidget"]),
+    ...mapState(["loading", "showDownloadWidget", "settings"]),
   },
   methods: {
-    ...mapMutations(["updateDownload", "updateDownloadState"]),
+    ...mapMutations([
+      "updateDownload",
+      "updateDownloadState",
+      "setSettings",
+      "updateSetting",
+    ]),
   },
   mounted() {
     setTimeout(() => {
@@ -49,6 +54,12 @@ export default {
     ipcRenderer.on("updateDownloadState", (e, payload) => {
       this.updateDownloadState(payload);
     });
+    ipcRenderer.on("updateSetting", (e, payload) => {
+      this.updateSetting(payload);
+    });
+    ipcRenderer.invoke("sendSettings").then((settings) => {
+      this.setSettings(settings);
+    });
   },
 };
 </script>
@@ -56,6 +67,7 @@ export default {
 @import url("./assets/styles/utilityClasses.css");
 @import url("./assets/styles/animate.css");
 @import url("./assets/styles/component.css");
+@import url("./assets/styles/global.css");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 ::-webkit-scrollbar {
@@ -87,5 +99,8 @@ body {
   flex-direction: row-reverse;
   padding-right: 10px;
   padding-top: 50px;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 </style>

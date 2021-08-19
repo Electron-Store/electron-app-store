@@ -2,7 +2,7 @@
   <div
     :class="[
       download.state == 'Canceled' ? 'dl_canceled' : '',
-      'dl_card flex flex-col pos-rel round20 center-v',
+      'dl_card flex flex-col pos-rel round20 center-v mb10',
     ]"
   >
     <div class="progress pos-abs bottom0 left10"></div>
@@ -11,22 +11,30 @@
         <h5>{{ download.name.charAt(0) }}</h5>
       </div>
       <div class="card_body h-100 pa5 flex flex-col flex_between">
-        <strong class="text-ellipse w-90">{{ download.name }}</strong>
-        <p>{{ download.percent }}% of {{ download.fileSize }}mb</p>
+        <p style="width: 200px" class="text-ellipse">
+          {{ download.name }}
+        </p>
+        <p v-if="download.percent < 100 && download.state === 'Downloading'">
+          {{ download.percent }}% of {{ download.fileSize }}mb
+        </p>
+        <p v-else>{{ download.state }}</p>
       </div>
     </div>
-    <div class="card_actions round10 flex center-a">
+    <div
+      v-if="download.percent < 100"
+      class="card_actions round10 flex center-a"
+    >
       <button v-if="download.state === 'Downloading'" @click="pause">
-        <img src="@/assets/images/pause.svg" alt="" />
+        <img class="icon" src="@/assets/images/pause.svg" alt="" />
       </button>
       <button @click="resume" v-if="download.state === 'Paused'">
-        <img src="@/assets/images/play.svg" alt="" />
+        <img class="icon" src="@/assets/images/play.svg" alt="" />
       </button>
       <button @click="cancel" v-if="download.state === 'Downloading'">
-        <img src="@/assets/images/x.svg" alt="" />
+        <img class="icon" src="@/assets/images/x.svg" alt="" />
       </button>
       <button @click="retry" v-if="download.state === 'Canceled'">
-        <img src="@/assets/images/retry.svg" alt="" />
+        <img class="icon" src="@/assets/images/retry.svg" alt="" />
       </button>
     </div>
   </div>
@@ -94,7 +102,7 @@ export default {
 }
 
 .card_actions {
-  background: white;
+  background: var(--primaryColor);
   box-shadow: 2px -2px 10px rgba(0, 0, 0, 0.123);
   position: absolute;
   bottom: 0%;
@@ -108,7 +116,7 @@ export default {
     padding: 10px;
     cursor: pointer;
     &:hover {
-      background: gainsboro;
+      background: var(--hoverColor);
     }
     img {
       width: 20px;

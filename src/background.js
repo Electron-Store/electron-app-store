@@ -1,13 +1,21 @@
 "use strict";
 
-import { app, protocol, screen, BrowserWindow, ipcMain } from "electron";
+import {
+	app,
+	protocol,
+	screen,
+	BrowserWindow,
+	ipcMain,
+	dialog,
+	Menu,
+} from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 const { DownloaderHelper } = require("node-downloader-helper");
 import settings from "electron-settings";
 const isDevelopment = process.env.NODE_ENV !== "production";
 const path = require("path");
 
-const downloadFolder = path.join(require("os").homedir(), "Downloads");
+let downloadFolder = path.join(require("os").homedir(), "Downloads");
 
 protocol.registerSchemesAsPrivileged([
 	{ scheme: "app", privileges: { secure: true, standard: true } },
@@ -15,6 +23,7 @@ protocol.registerSchemesAsPrivileged([
 var win;
 
 async function createWindow() {
+	Menu.setApplicationMenu(null);
 	// Create the browser window.
 	win = new BrowserWindow({
 		width: screen.getPrimaryDisplay().bounds.width,
@@ -35,6 +44,10 @@ async function createWindow() {
 		// Load the index.html when not in development
 		win.loadURL("app://./index.html");
 	}
+	win.webContents.on("new-window", function(e, url) {
+		e.preventDefault();
+		require("electron").shell.openExternal(url);
+	});
 }
 
 // Quit when all windows are closed.
@@ -74,9 +87,27 @@ if (isDevelopment) {
 	}
 }
 
-ipcMain.on("setSetting",(e,payload)=>{
-	await settings.set(payload.name,payload.value)
-})
+ipcMain.handle("sendSettings", async () => {
+	return await getSettings();
+});
+
+ipcMain.on("setSetting", async (e, payload) => {
+	await settings.set(`${payload[0]}`, payload[1]);
+});
+
+ipcMain.on("showFolderDialog", () => {
+	dialog
+		.showOpenDialog(win, { properties: ["openDirectory"] })
+		.then((result) => {
+			win.webContents.send("updateSetting", [
+				"saveFolder",
+				result.filePaths[0],
+			]);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
 
 const downloads = new Map();
 
@@ -147,8 +178,14 @@ function setUpDownload(dlObject, id) {
 		});
 	});
 	dlObject.on("end", (info) => {
-		console.log("Download Completed");
-		console.log(info);
+		win.webContents.send("updateDownload", {
+			id,
+			percent: 100,
+			fileSize: info.onDiskSize,
+			state: "Completed",
+			fileName: info.fileName,
+			filepath: info.filePath,
+		});
 	});
 	dlObject.on("progress", (stats) => {
 		const percent = Math.floor(stats.progress);
@@ -162,4 +199,16 @@ function setUpDownload(dlObject, id) {
 			state,
 		});
 	});
+}
+
+async function getSettings() {
+	const savedSettings = await settings.get();
+	console.log(savedSettings);
+	const defaultSettings = {
+		darkMode: false,
+		saveFolder: downloadFolder,
+	};
+	const settingsToSend = Object.assign(defaultSettings, savedSettings);
+	downloadFolder = settingsToSend.saveFolder;
+	return settingsToSend;
 }

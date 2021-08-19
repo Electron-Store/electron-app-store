@@ -33,7 +33,7 @@ export default {
   right: 10px;
   height: 97.5vh;
   width: 300px;
-  background: white;
+  background: var(--primaryColor);
   z-index: 4;
   transition: 0.2s ease-in-out;
   box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.253);

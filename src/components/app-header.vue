@@ -10,20 +10,21 @@
         v-if="$route.name != 'explore'"
         src="@/assets/images/arrow-left-circle.svg"
         alt="back icon"
+        class="icon"
       />
-      <img v-else src="@/assets/images/home.svg" alt="home icon" />
+      <img v-else src="@/assets/images/home.svg" class="icon" alt="home icon" />
     </button>
     <div class="searchBox pos-rel">
       <input
         v-model="query"
         type="text"
-        class="pr5 round10"
+        class="pr5"
         v-on:keyup.enter="searchApp(query)"
         placeholder="Search"
         id="search"
       />
       <img
-        class="abs-center-y left5 unclickable"
+        class="abs-center-y left5 unclickable icon"
         src="@/assets/images/search.svg"
         alt="search icon"
       />
@@ -37,6 +38,7 @@
         v-if="!showDownloadWidget"
         src="@/assets/images/download.svg"
         alt="back icon"
+        class="icon"
       />
       <img v-else src="@/assets/images/x.svg" alt="back icon" />
     </button>
@@ -68,7 +70,7 @@ export default {
 
 <style lang="scss">
 header {
-  background: white;
+  background: var(--primaryColor);
   width: 93%;
   overflow: hidden;
   border-radius: 0px 0px 10px 10px;
@@ -77,11 +79,11 @@ header {
   z-index: 2;
   transition: 0.2s ease-in-out;
   button {
-    background: white;
+    background: var(--primaryColor);
     cursor: pointer;
     padding: 5px 8px;
     &:hover:not(.selected) {
-      background: rgb(240, 240, 240);
+      background: var(--hoverColor);
     }
     img {
       width: 20px;
@@ -92,7 +94,7 @@ header {
   width: 300px;
   input {
     width: 100%;
-    background: rgb(245, 245, 245);
+    background: var(--hoverColor);
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 30px;

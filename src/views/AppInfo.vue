@@ -5,7 +5,17 @@
       v-on:closeModal="releaseInfo = null"
       :files="releaseInfo.files"
     />
-    <div class="app_details pa10 h-100 round15 flex_between flex-col">
+    <div
+      class="
+        app_details
+        pa10
+        h-100
+        flex_between flex-col
+        pos-rel
+        h-100
+        scroll_y
+      "
+    >
       <div class="flex flex-col center-a gap20 mb10">
         <img :src="app.icon" />
         <h1>{{ app.name }}</h1>
@@ -13,21 +23,30 @@
           {{ app.description }}
         </p>
       </div>
-      <div class="flex center-a">
+      <div class="metas">
+        <div v-for="meta in app.meta" :key="meta.title" class="app_meta ma10">
+          <p>
+            <strong class="mb5"> {{ meta.title }} </strong>
+          </p>
+          <a
+            v-if="meta.data.includes('https')"
+            target="_blank"
+            :href="meta.data"
+            >{{ meta.data }}</a
+          >
+          <p v-else>{{ meta.data }}</p>
+        </div>
+      </div>
+      <div class="pos-abs left0 bottom0 w-100 flex center-a pa10 dl_container">
         <button
           v-if="app.latestRelease"
           id="instal_bt"
           @click="releaseInfo = app.latestRelease"
-          class="pt10 pb10 w-90 round20"
+          class="pt10 pb10 w-80 round20"
         >
           <h3>Download</h3>
         </button>
-      </div>
-      <div class="metas">
-        <div v-for="meta in app.meta" :key="meta.title" class="app_meta ma10">
-          <strong class="mb5"> {{ meta.title }} </strong>
-          <p>{{ meta.data }}</p>
-        </div>
+        <p v-else>No Download Files Available</p>
       </div>
     </div>
 
@@ -52,22 +71,40 @@ export default {
       releaseInfo: null,
     };
   },
+  mounted() {
+    const linkTags = document
+      .querySelector(".app_readme")
+      .querySelectorAll("a");
+    linkTags.forEach((link) => {
+      link.setAttribute("target", "_blank");
+    });
+  },
 };
 </script>
 
 <style lang="scss">
+.app_page {
+  overflow: hidden;
+}
 .app_details {
   width: 30%;
-  background: white;
+  background: var(--primaryColor);
+  padding-bottom: 80px;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.137);
+  height: 91vh;
+
   img {
     width: 70px;
+  }
+  .dl_container {
+    background: #dbf2ff;
   }
 }
 .app_readme {
   width: 69.5%;
   padding: 20px;
   margin-left: 5px;
-  background: white;
+  background: var(--primaryColor);
 }
 #instal_bt {
   background: #22afff;

@@ -47,7 +47,7 @@ export default {
   height: 91vh;
   position: absolute;
   left: 80px;
-  background: white;
+  background: var(--primaryColor);
   transition: 0.2s ease-in-out;
   border-radius: 20px;
 }

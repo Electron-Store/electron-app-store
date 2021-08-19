@@ -23,16 +23,10 @@ export default new Vuex.Store({
 		loading: false,
 		showDownloadWidget: false,
 		downloads: [],
-		settings: [
-			{
-				name: "Dark Mode",
-				value: false,
-			},
-			{
-				name: "Downloads Folder",
-				value: "---",
-			},
-		],
+		settings: {
+			darkMode: false,
+			saveFolder: "Default Downloads Folder",
+		},
 	},
 	mutations: {
 		async getExploreFeed(state) {
@@ -100,6 +94,12 @@ export default new Vuex.Store({
 		updateDownloadState(state, payload) {
 			const index = state.downloads.findIndex((d) => d.id === payload.id);
 			state.downloads[index].state = payload.state;
+		},
+		setSettings(state, payload) {
+			state.settings = payload;
+		},
+		updateSetting(state, payload) {
+			state.settings[`${payload[0]}`] = payload[1];
 		},
 	},
 	actions: {},

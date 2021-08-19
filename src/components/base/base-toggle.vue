@@ -3,8 +3,8 @@
     <input
       v-bind="attrs"
       v-on="listeners"
-      :value="value"
-      @change="change"
+      :checked="checked || false"
+      @change="change($event)"
       type="checkbox"
       id="switch"
     /><label for="switch"></label>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  props: ["value"],
+  props: ["checked"],
   computed: {
     listeners() {
       const { change, ...listeners } = this.$listeners;
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     change(event) {
-      this.$emit("change", event.target.value);
+      this.$emit("change", event.target.checked);
     },
   },
 };
@@ -60,7 +60,7 @@ export default {
     height: 70%;
     background: #fff;
     border-radius: 90px;
-    transition: 0.3s;
+    transition: 0.3s ease-in-out;
   }
 
   input:checked + label {
@@ -70,10 +70,6 @@ export default {
   input:checked + label:after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
-  }
-
-  label:active:after {
-    width: 90%;
   }
 }
 </style>

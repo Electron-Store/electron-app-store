@@ -1,0 +1,34 @@
+.app {
+	--primaryColor: white;
+	--secondaryColor: black;
+	--hoverColor: rgb(243, 243, 243);
+}
+
+.app p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+	color: var(--secondaryColor);
+}
+
+.darkMode {
+	background: var(--hoverColor);
+	--hoverColor: rgb(14, 14, 14);
+	--primaryColor: rgb(7, 7, 7);
+	--secondaryColor: white;
+}
+.darkMode .icon {
+	filter: invert(1);
+}
+
+.darkMode a {
+	color: white;
+}
+
+.darkMode .splash {
+	filter: invert(1);
+}

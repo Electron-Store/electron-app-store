@@ -1,6 +1,11 @@
 <template>
   <div class="base_button">
-    <button class="pl10 pr10 pt5 pb5 round15 w-100">
+    <button
+      v-bind="attrs"
+      v-on="listeners"
+      @click="emitClick"
+      class="pl10 pr10 pt5 pb5 round15 w-100"
+    >
       <strong>{{ text }}</strong>
     </button>
   </div>
@@ -19,6 +24,12 @@ export default {
     attrs() {
       const { rows, ...attrs } = this.$attrs;
       return attrs;
+    },
+  },
+  methods: {
+    emitClick() {
+      // this.$emit("click");
+      //Unnecessary as the button has been wrapped in a div element which vue can register clicks without .native modifier
     },
   },
 };

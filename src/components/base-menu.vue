@@ -26,7 +26,7 @@
         :key="category.name"
         @click="fetchCategory(category.name)"
       >
-        <img :src="category.icon" alt="" />
+        <img :src="category.icon" class="icon" alt="" />
         <p>{{ category.name }}</p>
       </li>
     </ul>
@@ -90,7 +90,7 @@ export default {
   left: 5px;
   height: 97.5vh;
   width: 60px;
-  background: white;
+  background: var(--primaryColor);
   z-index: 4;
   transition: 0.2s ease-in-out;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.253);
@@ -135,7 +135,7 @@ export default {
     border-radius: 10px;
     cursor: pointer;
     &:hover:not(.selected) {
-      background: rgb(233, 233, 233);
+      background: var(--hoverColor);
     }
     img {
       width: 20px;
@@ -158,34 +158,52 @@ export default {
     background: rgba(0, 0, 0, 0.384);
   }
 }
+
 .selected {
-  background: #000000 !important;
+  background: var(--secondaryColor) !important;
   img {
     filter: invert(1);
   }
   p {
-    color: white;
+    color: var(--primaryColor) !important;
   }
 }
+
 #categories_list {
   height: 92%;
   width: 105%;
   padding-bottom: 20px;
 }
 #c_title_area {
-  background: white;
   color: white;
   // box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.089);
 }
 #exploreBt {
-  background: white;
+  background: var(--primaryColor);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.384);
   z-index: 2;
   transition: 0.2s ease-in-out;
 }
 #settingsBt {
-  background: white;
+  background: var(--primaryColor);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.384);
   transition: 0.2s ease-in-out;
+}
+.darkMode {
+  .selected {
+    img {
+      filter: none;
+    }
+  }
+}
+.darkMode #exploreBt,
+#settingsBt {
+  background: var(--hoverColor);
+}
+.darkMode #exploreBt:not(.selected) img {
+  filter: invert(1);
+}
+.darkMode #settingsBt:not(.selected) img {
+  filter: invert(1);
 }
 </style>
