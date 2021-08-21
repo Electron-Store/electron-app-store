@@ -3,8 +3,8 @@
     <div class="flex center-a w-100 pt5">
       <h3>{{ query }}: Search Results</h3>
     </div>
-    <div class="page_body scroll_y w-100">
-      <div class="flex_auto">
+    <div class="page_body scroll_y h-100 w-100">
+      <div class="flex_auto center-a scroll_y h-90">
         <app-card v-for="app in searchResults" :app="app" :key="app.id" />
       </div>
     </div>

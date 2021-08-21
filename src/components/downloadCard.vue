@@ -37,6 +37,14 @@
         <img class="icon" src="@/assets/images/retry.svg" alt="" />
       </button>
     </div>
+    <div
+      class="card_actions round10 flex center-a"
+      v-if="download.state === 'Completed' || download.state === 'Installed'"
+    >
+      <!-- <button><p>Open</p></button> -->
+      <button @click="openFileLocation"><p>Open File Location</p></button>
+      <!-- <button><p>Launch</p></button> -->
+    </div>
   </div>
 </template>
 
@@ -55,6 +63,9 @@ export default {
     },
     retry() {
       ipcRenderer.send("retry", this.download.id);
+    },
+    openFileLocation() {
+      ipcRenderer.send("openFileLocation", this.download.filePath);
     },
   },
   props: {
@@ -103,7 +114,7 @@ export default {
 
 .card_actions {
   background: var(--primaryColor);
-  box-shadow: 2px -2px 10px rgba(0, 0, 0, 0.123);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.055);
   position: absolute;
   bottom: 0%;
   right: 10px;

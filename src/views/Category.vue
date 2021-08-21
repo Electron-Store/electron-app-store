@@ -44,7 +44,7 @@ export default {
 }
 .page {
   width: 93%;
-  height: 91vh;
+  height: 91.5vh;
   position: absolute;
   left: 80px;
   background: var(--primaryColor);

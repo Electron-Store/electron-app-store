@@ -33,7 +33,10 @@ export default {
   name: "Category",
   computed: {
     ...mapState({
-      feeds: (state) => state.exploreFeed,
+      feeds: (state) =>
+        state.exploreFeed.sort((a, b) =>
+          a.apps.length < b.apps.length ? 1 : -1
+        ),
       shrinkContainer: (state) => state.showDownloadWidget,
     }),
   },

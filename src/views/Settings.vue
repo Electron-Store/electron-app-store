@@ -1,5 +1,8 @@
 <template>
   <div class="Settings page">
+    <div class="w-100 flex center-a">
+      <h1>Settings</h1>
+    </div>
     <div class="grid4 align-top w-100 h-100">
       <div class="flex flex-col">
         <div class="setting_box center-v flex flex_between pa10 border_split">

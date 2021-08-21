@@ -66,7 +66,6 @@ export default {
       this.categories = this.categories.filter(
         (category) => !toHide.includes(category.name)
       );
-      console.log(this.categories);
       localStorage.setItem("category-list", JSON.stringify(this.categories));
     },
     fetchCategory(name) {

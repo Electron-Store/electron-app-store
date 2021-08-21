@@ -17,7 +17,7 @@
       "
     >
       <div class="flex flex-col center-a gap20 mb10">
-        <img :src="app.icon" />
+        <img :src="app.logo" />
         <h1>{{ app.name }}</h1>
         <p class="text-align-center">
           {{ app.description }}
@@ -50,9 +50,10 @@
       </div>
     </div>
 
-    <div class="app_readme h-100 scroll_y round15">
+    <div v-if="app.readme" class="app_readme h-100 scroll_y round15">
       <div v-html="app.readme"></div>
     </div>
+    <webview class="w-100" v-else :src="website" />
   </div>
 </template>
 
@@ -65,19 +66,32 @@ export default {
     ...mapState({
       app: (state) => state.selectedApp,
     }),
+    website() {
+      const url = this.app.meta.filter((meta) => meta.title === "Website")[0]
+        .data;
+      console.log(url);
+      return url;
+    },
   },
   data() {
     return {
       releaseInfo: null,
     };
   },
+  methods: {
+    fixLinks() {
+      const readMe = document.querySelector(".app_readme");
+      if (readMe) {
+        const linkTags = readMe.querySelectorAll("a") || [];
+
+        linkTags.forEach((link) => {
+          link.setAttribute("target", "_blank");
+        });
+      }
+    },
+  },
   mounted() {
-    const linkTags = document
-      .querySelector(".app_readme")
-      .querySelectorAll("a");
-    linkTags.forEach((link) => {
-      link.setAttribute("target", "_blank");
-    });
+    this.fixLinks();
   },
 };
 </script>

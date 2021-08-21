@@ -8,12 +8,18 @@ import {
 	ipcMain,
 	dialog,
 	Menu,
+	shell,
 } from "electron";
+import settings from "electron-settings";
+import { autoUpdater } from "electron-updater";
+import { exec } from "child_process";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 const { DownloaderHelper } = require("node-downloader-helper");
-import settings from "electron-settings";
 const isDevelopment = process.env.NODE_ENV !== "production";
 const path = require("path");
+
+Menu.setApplicationMenu(null);
+autoUpdater.checkForUpdatesAndNotify();
 
 let downloadFolder = path.join(require("os").homedir(), "Downloads");
 
@@ -23,19 +29,16 @@ protocol.registerSchemesAsPrivileged([
 var win;
 
 async function createWindow() {
-	Menu.setApplicationMenu(null);
-	// Create the browser window.
 	win = new BrowserWindow({
 		width: screen.getPrimaryDisplay().bounds.width,
 		height: screen.getPrimaryDisplay().bounds.height,
 		webPreferences: {
-			// Use pluginOptions.nodeIntegration, leave this alone
-			// See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
 			nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
 			contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+			webviewTag: true,
 		},
 	});
-
+	captureDownloadEvents(win);
 	if (process.env.WEBPACK_DEV_SERVER_URL) {
 		// Load the url of the dev server if in development mode
 		await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
@@ -112,21 +115,14 @@ ipcMain.on("showFolderDialog", () => {
 const downloads = new Map();
 
 ipcMain.on("downloadFile", (e, download) => {
-	console.log(download);
-	const dl = new DownloaderHelper(download.url, downloadFolder);
-	downloads.set(download.id, {
-		...download,
-		dl,
-	});
-	setUpDownload(dl, download.id);
-	dl.start();
+	initiateFileDownload(download);
 });
 
 ipcMain.on("retry", (e, id) => {
 	console.log("Retrying");
 	const url = downloads.get(id).url;
 	const dl = new DownloaderHelper(url, downloadFolder);
-	setUpDownload(dl, id);
+	addDownloadListeners(dl, id);
 	dl.start();
 	win.webContents.send("updateDownload", {
 		id,
@@ -162,11 +158,27 @@ ipcMain.on("resume", (e, id) => {
 	win.webContents.send("updateDownloadState", { id, state: "Downloading" });
 });
 
+ipcMain.on("openFileLocation", (e, filePath) => {
+	shell.showItemInFolder(filePath);
+});
+
+function initiateFileDownload(download) {
+	const dl = new DownloaderHelper(download.url, downloadFolder, {
+		override: true,
+	});
+	downloads.set(download.id, {
+		...download,
+		dl,
+	});
+	addDownloadListeners(dl, download.id);
+	dl.start();
+}
+
 function bytesTopMb(bytes) {
 	return Math.floor(bytes / 1000000);
 }
 
-function setUpDownload(dlObject, id) {
+function addDownloadListeners(dlObject, id) {
 	dlObject.on("error", (info) => {
 		console.log("Download Error");
 		console.log(info);
@@ -178,14 +190,16 @@ function setUpDownload(dlObject, id) {
 		});
 	});
 	dlObject.on("end", (info) => {
+		if (info.incomplete) return;
 		win.webContents.send("updateDownload", {
 			id,
 			percent: 100,
 			fileSize: info.onDiskSize,
 			state: "Completed",
 			fileName: info.fileName,
-			filepath: info.filePath,
+			filePath: info.filePath,
 		});
+		spawnSilentInstall(id, info);
 	});
 	dlObject.on("progress", (stats) => {
 		const percent = Math.floor(stats.progress);
@@ -211,4 +225,40 @@ async function getSettings() {
 	const settingsToSend = Object.assign(defaultSettings, savedSettings);
 	downloadFolder = settingsToSend.saveFolder;
 	return settingsToSend;
+}
+
+function spawnSilentInstall(id, info) {
+	console.log("Spawning installer");
+	console.log(info);
+	const regex = /exe/i;
+	if (regex.test(info.filePath)) {
+		exec(`${info.filePath}`, function(err, data) {
+			if (err) return;
+			win.webContents.send("updateDownload", {
+				id,
+				percent: 100,
+				fileSize: info.onDiskSize,
+				state: "Installed",
+				fileName: info.fileName,
+				filePath: info.filePath,
+			});
+		});
+	}
+}
+
+function captureDownloadEvents(win) {
+	win.webContents.session.on("will-download", (e, item, webContents) => {
+		e.preventDefault();
+		const fileURL = item.getURL();
+		const newDownload = {
+			id: Date(),
+			url: fileURL,
+			name: fileURL,
+			percent: 0,
+			fileSize: "0mb",
+			state: "Starting",
+		};
+		win.webContents.send("newWebsiteDownload", newDownload);
+		initiateFileDownload(newDownload);
+	});
 }

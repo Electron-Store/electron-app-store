@@ -1,11 +1,22 @@
 {
 	"name": "electron-app-store",
-	"version": "0.1.0",
+	"productName": "Electron Store",
+	"appId": "electron-store",
+	"author": {
+		"name": "Patrick Waweru",
+		"email": "pntxall100@gmail.com"
+	},
+	"description": "A Simple App Store for Apps Built with Electron",
+	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Patrick-web/electron-app-store.git"
+	},
 	"private": true,
 	"scripts": {
-		"serve": "vue-cli-service serve",
-		"build": "vue-cli-service build",
-		"electron:build": "vue-cli-service electron:build",
+		"web-serve": "vue-cli-service serve",
+		"web-build": "vue-cli-service build",
+		"build": "vue-cli-service electron:build",
 		"dev": "vue-cli-service electron:serve",
 		"postinstall": "electron-builder install-app-deps",
 		"postuninstall": "electron-builder install-app-deps"
@@ -14,6 +25,7 @@
 	"dependencies": {
 		"core-js": "^3.6.5",
 		"electron-settings": "^4.0.2",
+		"electron-updater": "^4.3.9",
 		"node-downloader-helper": "^1.0.18",
 		"vue": "^2.6.11",
 		"vue-router": "^3.2.0",

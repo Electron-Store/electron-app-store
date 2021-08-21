@@ -1,6 +1,6 @@
 <template>
-  <div class="loading_indicator pos-fix w-100 h-100 top0 left0 flex center-a">
-    <div class="lds-roller">
+  <div class="loading_indicator pos-fix h-100 top0 flex center-a">
+    <div class="lds-roller pos-rel z-index-3" v-if="internetIsLikelyOn">
       <div></div>
       <div></div>
       <div></div>
@@ -10,17 +10,43 @@
       <div></div>
       <div></div>
     </div>
+    <div v-else class="flex flex-col center-a pos-rel z-index-3">
+      <h1>⚠️</h1>
+      <h2>Please Check Your Internet Connection</h2>
+    </div>
+
+    <div class="pos-abs top0 left0 w-100 h-100 blurred_bg blur40"></div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapMutations } from "vuex";
+export default {
+  data() {
+    return {
+      internetIsLikelyOn: true,
+    };
+  },
+  methods: {
+    ...mapMutations(["setLoadingState"]),
+  },
+  mounted() {
+    setTimeout(() => {
+      this.internetIsLikelyOn = false;
+    }, 1000);
+    setTimeout(() => {
+      this.setLoadingState(false);
+    }, 1800);
+  },
+};
 </script>
 
 <style lang="scss">
 .loading_indicator {
   z-index: 10;
-  background: rgba(0, 0, 0, 0.219);
+  // background: rgba(0, 0, 0, 0.219);
+  right: 0px;
+  width: 94.5%;
 }
 .lds-roller {
   display: inline-block;

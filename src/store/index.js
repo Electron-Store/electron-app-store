@@ -29,10 +29,12 @@ export default new Vuex.Store({
 		},
 	},
 	mutations: {
+		setLoadingState(state, payload) {
+			state.loading = payload;
+		},
 		async getExploreFeed(state) {
 			state.loading = true;
 			state.exploreFeed = await createRequest("explore-feed");
-			console.log(state.exploreFeed);
 			state.loading = false;
 		},
 		async selectCategory(state, payload) {
@@ -82,14 +84,20 @@ export default new Vuex.Store({
 		toggleDownloadWidget(state) {
 			state.showDownloadWidget = !state.showDownloadWidget;
 		},
+		restoreDownloadsData(state, payload) {
+			state.downloads = payload;
+		},
 		addToDownloads(state, payload) {
 			state.downloads.push(payload);
 		},
 		updateDownload(state, payload) {
 			const index = state.downloads.findIndex((d) => d.id === payload.id);
-			state.downloads[index].fileSize = payload.fileSize;
-			state.downloads[index].percent = payload.percent;
-			state.downloads[index].state = payload.state;
+			const targetDownload = state.downloads[index];
+			const updatedDownload = Object.assign(targetDownload, payload);
+			state.downloads[index] = updatedDownload;
+			if (updatedDownload.state != "Downloading") {
+				saveData(state.downloads);
+			}
 		},
 		updateDownloadState(state, payload) {
 			const index = state.downloads.findIndex((d) => d.id === payload.id);
@@ -105,3 +113,7 @@ export default new Vuex.Store({
 	actions: {},
 	modules: {},
 });
+
+function saveData(downloads) {
+	localStorage.setItem("downloads", JSON.stringify(downloads));
+}

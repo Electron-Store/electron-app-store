@@ -613,3 +613,13 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
+
+.z-index-2 {
+	z-index: 2;
+}
+.z-index-3 {
+	z-index: 3;
+}
+.z-index-4 {
+	z-index: 4;
+}

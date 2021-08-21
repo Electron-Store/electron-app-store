@@ -1,6 +1,6 @@
 <template>
   <div :class="[settings.darkMode ? 'darkMode' : '', 'app']" id="app">
-    <!-- <loading v-if="loading" /> -->
+    <loading v-if="loading" />
     <app-header />
     <base-menu />
     <splash v-if="showSplash" />
@@ -42,6 +42,8 @@ export default {
       "updateDownloadState",
       "setSettings",
       "updateSetting",
+      "restoreDownloadsData",
+      "addToDownloads",
     ]),
   },
   mounted() {
@@ -60,6 +62,16 @@ export default {
     ipcRenderer.invoke("sendSettings").then((settings) => {
       this.setSettings(settings);
     });
+    ipcRenderer.on("newWebsiteDownload", (e, payload) => {
+      this.addToDownloads(payload);
+      if (!this.showDownloadWidget) {
+        this.toggleDownloadWidget();
+      }
+    });
+    const downloads = localStorage.getItem("downloads")
+      ? JSON.parse(localStorage.getItem("downloads"))
+      : [];
+    this.restoreDownloadsData(downloads);
   },
 };
 </script>
@@ -98,7 +110,7 @@ body {
   display: flex;
   flex-direction: row-reverse;
   padding-right: 10px;
-  padding-top: 50px;
+  padding-top: 45px;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
