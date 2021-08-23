@@ -1,6 +1,6 @@
 <template>
   <div class="splash flex center-a flex-col">
-    <h1 class="animate fadeInUp">The Electron App Store</h1>
+    <h1 class="animate fadeInUp">The Electron Store</h1>
     <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" fill-rule="evenodd">
         <g class="hero-apps">
