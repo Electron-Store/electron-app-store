@@ -126,6 +126,7 @@ export default {
     background: none;
     padding: 10px;
     cursor: pointer;
+    background: var(--primaryColor);
     &:hover {
       background: var(--hoverColor);
     }

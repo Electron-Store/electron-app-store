@@ -11,7 +11,8 @@ h3,
 h4,
 h5,
 h6,
-strong {
+strong,
+input {
 	color: var(--secondaryColor);
 }
 
@@ -29,6 +30,11 @@ strong {
 	color: white;
 }
 
-.darkMode .splash {
-	filter: invert(1);
+button {
+	background: none;
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+}
+button:hover {
+	background: var(--hoverColor);
 }

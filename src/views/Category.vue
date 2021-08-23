@@ -50,8 +50,6 @@ export default {
   background: var(--primaryColor);
   transition: 0.2s ease-in-out;
   border-radius: 20px;
-}
-.category_page {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.253);
 }
 .page_sliver {

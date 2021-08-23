@@ -46,14 +46,55 @@
         >
           <h3>Download</h3>
         </button>
-        <p v-else>No Download Files Available</p>
+        <p v-else>Download from Website</p>
       </div>
     </div>
-
-    <div v-if="app.readme" class="app_readme h-100 scroll_y round15">
-      <div v-html="app.readme"></div>
+    <div class="app_info w-100 pos-rel">
+      <div class="tab_switcher pos-abs bottom10 left10">
+        <button
+          v-if="app.readme"
+          @click="loadReadMe"
+          :class="[!showWebsite ? 'selected' : '', 'pa10']"
+        >
+          <p>ReadMe</p>
+        </button>
+        <button
+          v-if="website"
+          @click="loadWebsite"
+          :class="[showWebsite ? 'selected' : '', 'pa10']"
+        >
+          <p>Website</p>
+        </button>
+      </div>
+      <div v-if="!showWebsite" class="app_readme h-100 scroll_y round15 w-100">
+        <div v-html="app.readme"></div>
+      </div>
+      <div v-if="showWebsite" class="app_website w-100 h-100 pa10">
+        <div class="flex center-a">
+          <!-- <button @click="goBack" title="Go back" class="website_navigator">
+            <img
+              src="@/assets/images/arrow-left.svg"
+              alt="back icon"
+              class="icon"
+            />
+          </button> -->
+          <h3 class="text-align-center mb5">Website</h3>
+          <!-- <button
+            @click="goForward"
+            title="Go Forward"
+            class="pa5 website_navigator"
+          >
+            <img
+              src="@/assets/images/arrow-right.svg"
+              alt="forward icon"
+              class="icon"
+            />
+          </button> -->
+        </div>
+        <webview class="w-100 h-100 round20 no_scroll" :src="website" />
+        <p v-if="webviewIsLoading" class="pa10">Loading App Website...</p>
+      </div>
     </div>
-    <webview class="w-100" v-else :src="website" />
   </div>
 </template>
 
@@ -76,6 +117,8 @@ export default {
   data() {
     return {
       releaseInfo: null,
+      webviewIsLoading: true,
+      showWebsite: false,
     };
   },
   methods: {
@@ -89,9 +132,37 @@ export default {
         });
       }
     },
+    goBack() {
+      const webview = document.querySelector("webview");
+      webview.goBack();
+    },
+    goForward() {
+      const webview = document.querySelector("webview");
+      webview.goForward();
+    },
+    setupWebview() {
+      const webview = document.querySelector("webview");
+      webview.addEventListener("did-finish-load", () => {
+        this.webviewIsLoading = false;
+      });
+    },
+    loadWebsite() {
+      this.showWebsite = true;
+      setTimeout(() => {
+        this.setupWebview();
+      }, 0);
+    },
+    loadReadMe() {
+      this.showWebsite = false;
+      this.fixLinks();
+    },
   },
   mounted() {
-    this.fixLinks();
+    if (this.app.readme) {
+      this.loadReadMe();
+    } else {
+      this.loadWebsite();
+    }
   },
 };
 </script>
@@ -101,6 +172,7 @@ export default {
   overflow: hidden;
 }
 .app_details {
+  min-width: 30%;
   width: 30%;
   background: var(--primaryColor);
   padding-bottom: 80px;
@@ -115,10 +187,24 @@ export default {
   }
 }
 .app_readme {
-  width: 69.5%;
   padding: 20px;
   margin-left: 5px;
   background: var(--primaryColor);
+}
+.app_website {
+  .website_navigator {
+    padding: 2px;
+    border-radius: 10px;
+    img {
+      width: 18px;
+    }
+  }
+}
+.tab_switcher {
+  background: var(--primaryColor);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.425);
+  border-radius: 10px;
+  overflow: hidden;
 }
 #instal_bt {
   background: #22afff;

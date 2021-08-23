@@ -26,7 +26,6 @@ export default {
 <style lang="scss">
 .app-card {
   cursor: pointer;
-  width: 23.4%;
   overflow: hidden;
   transition: 0.2s ease-in-out;
   &:hover {
@@ -38,11 +37,12 @@ export default {
   }
   img {
     height: 50px;
+    margin: 5px;
     transition: 0.2s ease-in-out;
   }
   h5 {
     font-size: 1.3rem;
-    width: 230px;
+    width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -50,7 +50,7 @@ export default {
     -webkit-box-orient: vertical;
   }
   p {
-    width: 230px;
+    width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

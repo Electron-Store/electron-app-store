@@ -50,20 +50,17 @@ export default new Vuex.Store({
 				);
 				state.loading = false;
 				state.cache.set(state.selectedCategory.name, state.selectedCategory);
-				console.log(state.selectedCategory);
 			}
 			if (router.currentRoute.fullPath !== "/category") {
 				router.push("/category");
 			}
 		},
 		async selectApp(state, payload) {
-			console.log(payload);
 			state.loading = true;
 			state.selectedApp = await createRequest(
 				"get-app",
 				toQueryString({ appID: payload })
 			);
-			console.log(state.selectedApp);
 			router.push("/appPage");
 			state.loading = false;
 		},
@@ -75,14 +72,19 @@ export default new Vuex.Store({
 					query: payload,
 				})
 			);
-			console.log(state.searchResults);
 			state.loading = false;
 			if (router.currentRoute.fullPath !== "/searchPage") {
 				router.push("/searchPage");
 			}
 		},
-		toggleDownloadWidget(state) {
-			state.showDownloadWidget = !state.showDownloadWidget;
+		toggleDownloadWidget(state, payload) {
+			if (payload == "Open") {
+				state.showDownloadWidget = true;
+			} else if (payload == "Close") {
+				state.showDownloadWidget = false;
+			} else {
+				state.showDownloadWidget = !state.showDownloadWidget;
+			}
 		},
 		restoreDownloadsData(state, payload) {
 			state.downloads = payload;

@@ -44,6 +44,7 @@ export default {
       "updateSetting",
       "restoreDownloadsData",
       "addToDownloads",
+      "toggleDownloadWidget",
     ]),
   },
   mounted() {
@@ -64,9 +65,7 @@ export default {
     });
     ipcRenderer.on("newWebsiteDownload", (e, payload) => {
       this.addToDownloads(payload);
-      if (!this.showDownloadWidget) {
-        this.toggleDownloadWidget();
-      }
+      this.toggleDownloadWidget("Open");
     });
     const downloads = localStorage.getItem("downloads")
       ? JSON.parse(localStorage.getItem("downloads"))

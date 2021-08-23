@@ -129,10 +129,10 @@ export default {};
 .splash {
   position: fixed;
   z-index: 10;
-  background: white;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
+  background: var(--primaryColor);
 }
 </style>

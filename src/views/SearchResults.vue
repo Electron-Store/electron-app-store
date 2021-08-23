@@ -35,8 +35,4 @@ export default {
 </script>
 
 <style lang="scss">
-.search_page {
-  background: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.253);
-}
 </style>

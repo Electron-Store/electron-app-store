@@ -1,7 +1,9 @@
 <template>
-  <div class="download_widget pa10 round20">
-    <h3 class="text-align-center mb10">Downloads</h3>
-    <div class="dls">
+  <div class="download_widget round20 scroll_y">
+    <div class="widget_title pos-sticky top0 pa5">
+      <h3 class="text-align-center">Downloads</h3>
+    </div>
+    <div class="dls pa10">
       <download-card
         v-for="download in downloads"
         :key="download.id"
@@ -37,5 +39,8 @@ export default {
   z-index: 4;
   transition: 0.2s ease-in-out;
   box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.253);
+  .widget_title {
+    background: var(--primaryColor);
+  }
 }
 </style>

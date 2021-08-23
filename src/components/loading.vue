@@ -33,10 +33,10 @@ export default {
   mounted() {
     setTimeout(() => {
       this.internetIsLikelyOn = false;
-    }, 1000);
+    }, 5000);
     setTimeout(() => {
       this.setLoadingState(false);
-    }, 1800);
+    }, 5500);
   },
 };
 </script>
@@ -46,7 +46,7 @@ export default {
   z-index: 10;
   // background: rgba(0, 0, 0, 0.219);
   right: 0px;
-  width: 94.5%;
+  width: 100%;
 }
 .lds-roller {
   display: inline-block;

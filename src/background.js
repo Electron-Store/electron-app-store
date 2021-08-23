@@ -37,7 +37,9 @@ async function createWindow() {
 			contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
 			webviewTag: true,
 		},
+		title: "Electron Store",
 	});
+	app.setName("Electron Store");
 	captureDownloadEvents(win);
 	if (process.env.WEBPACK_DEV_SERVER_URL) {
 		// Load the url of the dev server if in development mode
@@ -92,6 +94,9 @@ if (isDevelopment) {
 
 ipcMain.handle("sendSettings", async () => {
 	return await getSettings();
+});
+ipcMain.handle("getAppVersion", async () => {
+	return app.getVersion();
 });
 
 ipcMain.on("setSetting", async (e, payload) => {

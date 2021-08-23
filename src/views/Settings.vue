@@ -22,6 +22,10 @@
             />
           </div>
         </div>
+        <div class="setting_box flex flex_between">
+          <strong>Version</strong>
+          <p>{{ appVersion }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -33,6 +37,11 @@ import { mapMutations, mapState } from "vuex";
 import BaseButton from "../components/base/base-button.vue";
 import baseToggle from "../components/base/base-toggle.vue";
 export default {
+  data() {
+    return {
+      appVersion: "x.x.x",
+    };
+  },
   computed: {
     ...mapState(["settings"]),
   },
@@ -46,6 +55,16 @@ export default {
     showFolderDialog() {
       ipcRenderer.send("showFolderDialog");
     },
+  },
+  mounted() {
+    ipcRenderer
+      .invoke("getAppVersion")
+      .then((version) => {
+        this.appVersion = version;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>
