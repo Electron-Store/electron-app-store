@@ -109,7 +109,7 @@ export default {
     }),
     website() {
       const url = this.app.meta.filter((meta) => meta.title === "Website")[0]
-        .data;
+        ?.data || null;
       console.log(url);
       return url;
     },
