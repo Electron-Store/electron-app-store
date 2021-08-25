@@ -18,6 +18,7 @@ input {
 
 .darkMode {
 	background: var(--hoverColor);
+	color: white !important;
 	--hoverColor: rgb(14, 14, 14);
 	--primaryColor: rgb(7, 7, 7);
 	--secondaryColor: white;
