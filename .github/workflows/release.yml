@@ -6,12 +6,6 @@ on:
       - v[0-9]+.[0-9]+.[0-9]+
 
 jobs:
-  install-snapcraft:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install Snapcraft
-      uses: samuelmeuli/action-snapcraft@v1
-
   release:
     runs-on: ${{ matrix.os }}
 
@@ -28,6 +22,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 15
+          
+      - name: Install Snapcraft
+        uses: samuelmeuli/action-snapcraft@v1
+        # Only install Snapcraft on Ubuntu
+        if: startsWith(matrix.os, 'ubuntu')
+        with:
+          # Log in to Snap Store
+          snapcraft_token: ${{ secrets.snapcraft_token }}
 
       - name: Build Electron app
         uses: samuelmeuli/action-electron-builder@v1
