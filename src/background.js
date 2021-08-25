@@ -32,6 +32,7 @@ async function createWindow() {
 	win = new BrowserWindow({
 		width: screen.getPrimaryDisplay().bounds.width,
 		height: screen.getPrimaryDisplay().bounds.height,
+		frame: false,
 		webPreferences: {
 			nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
 			contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
@@ -75,6 +76,7 @@ app.on("activate", () => {
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
 	createWindow();
+	win.openDevTools();
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -235,7 +237,7 @@ async function getSettings() {
 function spawnSilentInstall(id, info) {
 	console.log("Spawning installer");
 	console.log(info);
-	const regex = /exe/i;
+	const regex = /exe|appimage/i;
 	if (regex.test(info.filePath)) {
 		exec(`${info.filePath}`, function(err, data) {
 			if (err) return;

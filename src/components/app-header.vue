@@ -2,7 +2,7 @@
   <header
     :class="[
       showDownloadWidget ? 'shrink_container' : '',
-      'flex_between round10 center-v pos-abs top5',
+      'flex_between center-v pos-abs',
     ]"
   >
     <button id="back_bt" @click="goBack">
@@ -71,12 +71,12 @@ export default {
 <style lang="scss">
 header {
   background: var(--primaryColor);
-  width: 93%;
+  width: 94.3%;
   overflow: hidden;
-  border-radius: 0px 0px 10px 10px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.253);
-  left: 80px;
+  border-radius: 10px 10px 0px 0px;
+  left: 73px;
   z-index: 2;
+  top: 35px;
   transition: 0.2s ease-in-out;
   button {
     background: var(--primaryColor);
@@ -95,8 +95,8 @@ header {
   input {
     width: 100%;
     background: var(--hoverColor);
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 30px;
     opacity: 0.8;
     font-size: 1rem;

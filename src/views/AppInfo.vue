@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="app_info w-100 pos-rel">
-      <div class="tab_switcher pos-abs bottom10 left10">
+      <div class="tab_switcher pos-abs bottom0">
         <button
           v-if="app.readme"
           @click="loadReadMe"
@@ -66,7 +66,7 @@
           <p>Website</p>
         </button>
       </div>
-      <div v-if="!showWebsite" class="app_readme h-100 scroll_y round15 w-100">
+      <div v-if="!showWebsite" class="app_readme scroll_y round15 w-100">
         <div v-html="app.readme"></div>
       </div>
       <div v-if="showWebsite" class="app_website w-100 h-100 pa10">
@@ -78,7 +78,6 @@
               class="icon"
             />
           </button> -->
-          <h3 class="text-align-center mb5">Website</h3>
           <!-- <button
             @click="goForward"
             title="Go Forward"
@@ -91,8 +90,11 @@
             />
           </button> -->
         </div>
-        <webview class="w-100 h-100 round20 no_scroll" :src="website" />
-        <p v-if="webviewIsLoading" class="pa10">Loading App Website...</p>
+        <webview
+          style="height: 93.5%"
+          class="w-100 round20 no_scroll"
+          :src="website"
+        />
       </div>
     </div>
   </div>
@@ -108,8 +110,9 @@ export default {
       app: (state) => state.selectedApp,
     }),
     website() {
-      const url = this.app.meta.filter((meta) => meta.title === "Website")[0]
-        ?.data || null;
+      const url =
+        this.app.meta.filter((meta) => meta.title === "Website")[0]?.data ||
+        null;
       console.log(url);
       return url;
     },
@@ -190,6 +193,8 @@ export default {
   padding: 20px;
   margin-left: 5px;
   background: var(--primaryColor);
+  height: 95.5%;
+  width: 99%;
 }
 .app_website {
   .website_navigator {
@@ -202,9 +207,11 @@ export default {
 }
 .tab_switcher {
   background: var(--primaryColor);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.425);
-  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.151);
+  border-radius: 15px 15px 0px 0px;
   overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
 }
 #instal_bt {
   background: #22afff;

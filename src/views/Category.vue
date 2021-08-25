@@ -43,14 +43,14 @@ export default {
   width: 70.5% !important;
 }
 .page {
-  width: 93%;
-  height: 91.5vh;
+  width: 94.3%;
+  height: 93vh;
   position: absolute;
-  left: 80px;
+  left: 73px;
   background: var(--primaryColor);
   transition: 0.2s ease-in-out;
-  border-radius: 20px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.253);
+  border-radius: 15px;
+  // box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.253);
 }
 .page_sliver {
   height: 40%;
@@ -61,7 +61,7 @@ export default {
 }
 .image_sliver {
   z-index: 1;
-  top: -200px;
+  top: -185px;
   height: 250px;
   overflow: hidden;
   img {

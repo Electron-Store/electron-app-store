@@ -84,24 +84,20 @@ export default {
 <style  lang="scss">
 #menu {
   position: fixed;
-  top: 5px;
-  border-radius: 12px;
+  top: 35px;
+  border-radius: 10px;
   left: 5px;
-  height: 97.5vh;
+  height: 94vh;
   width: 60px;
   background: var(--primaryColor);
   z-index: 4;
   transition: 0.2s ease-in-out;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.253);
 
   &:hover {
     width: 190px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.253);
     #c_title_area {
       color: black;
-    }
-    #categories_list {
-      // width: 100%;
     }
     ul {
       margin-top: 40px;
@@ -175,17 +171,14 @@ export default {
 }
 #c_title_area {
   color: white;
-  // box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.089);
 }
 #exploreBt {
   background: var(--primaryColor);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.384);
   z-index: 2;
   transition: 0.2s ease-in-out;
 }
 #settingsBt {
   background: var(--primaryColor);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.384);
   transition: 0.2s ease-in-out;
 }
 .darkMode {

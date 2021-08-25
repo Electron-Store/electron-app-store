@@ -1,3 +1,8 @@
+*{
+	user-select: none;
+	-webkit-user-drag: none;
+}
+
 .app {
 	--primaryColor: white;
 	--secondaryColor: black;
@@ -39,3 +44,5 @@ button {
 button:hover {
 	background: var(--hoverColor);
 }
+
+
