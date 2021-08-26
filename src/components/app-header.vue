@@ -122,7 +122,6 @@ header {
 .shrink_container{
 #dls_bt{
 border-radius:10px;
-box-shadow:4px 4px 8px black;
 }
 }
 </style>

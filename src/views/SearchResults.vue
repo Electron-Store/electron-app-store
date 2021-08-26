@@ -1,5 +1,10 @@
 <template>
-  <div class="search_page page round20">
+  <div
+      :class="[
+      shrinkContainer ? 'shrink_container' : '',
+      'page search_page',
+    ]"
+  >
     <div class="flex center-a w-100 pt5">
       <h3>{{ query }}: Search Results</h3>
     </div>
@@ -25,6 +30,10 @@ export default {
     ...mapState({
       searchResults: (state) => state.searchResults,
     }),
+        ...mapState({
+      category: (state) => state.selectedCategory,
+      shrinkContainer: (state) => state.showDownloadWidget,
+    }),
   },
   components: { AppCard },
   mounted() {
@@ -35,4 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
+.search_page{
+	padding-top:30px;
+}
 </style>

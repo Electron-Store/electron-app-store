@@ -1,10 +1,6 @@
 <template>
   <div class="page app_page flex">
-    <download-modal
-      v-if="releaseInfo"
-      v-on:closeModal="releaseInfo = null"
-      :files="releaseInfo.files"
-    />
+
     <div
       class="
         app_details
@@ -14,6 +10,7 @@
         pos-rel
         h-100
         scroll_y
+        round20
       "
     >
       <div class="flex flex-col center-a gap20 mb10">
@@ -23,7 +20,7 @@
           {{ app.description }}
         </p>
       </div>
-      <div class="metas">
+      <div class="metas scroll_y">
         <div v-for="meta in app.meta" :key="meta.title" class="app_meta ma10">
           <p>
             <strong class="mb5"> {{ meta.title }} </strong>
@@ -48,6 +45,13 @@
         </button>
         <p v-else>Download from Website</p>
       </div>
+      <transition enter-active-class="animate slideInUp fast" leave-active-class="animate slideOutDown fast">
+          <download-modal
+      v-if="releaseInfo"
+      v-on:closeModal="releaseInfo = null"
+      :files="releaseInfo.files"
+    />
+    </transition>
     </div>
     <div class="app_info w-100 pos-rel">
       <div class="tab_switcher pos-abs bottom0">
@@ -66,36 +70,19 @@
           <p>Website</p>
         </button>
       </div>
+      	<transition enter-active-class="animate slideInLeft fast" leave-active-class="animate slideOutLeft fast">
       <div v-if="!showWebsite" class="app_readme scroll_y round15 w-100">
         <div v-html="app.readme"></div>
       </div>
-      <div v-if="showWebsite" class="app_website w-100 h-100 pa10">
-        <div class="flex center-a">
-          <!-- <button @click="goBack" title="Go back" class="website_navigator">
-            <img
-              src="@/assets/images/arrow-left.svg"
-              alt="back icon"
-              class="icon"
-            />
-          </button> -->
-          <!-- <button
-            @click="goForward"
-            title="Go Forward"
-            class="pa5 website_navigator"
-          >
-            <img
-              src="@/assets/images/arrow-right.svg"
-              alt="forward icon"
-              class="icon"
-            />
-          </button> -->
-        </div>
+      </transition>
+	<transition enter-active-class="animate slideInLeft fast" leave-active-class="animate slideOutRight fast">
+      <div v-if="showWebsite" class="app_website w-100 pa10">
         <webview
-          style="height: 93.5%"
-          class="w-100 round20 no_scroll"
+          class="w-100 round20 no_scroll h-100"
           :src="website"
         />
       </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -178,10 +165,9 @@ export default {
   min-width: 30%;
   width: 30%;
   background: var(--primaryColor);
-  padding-bottom: 80px;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.137);
-  height: 91vh;
-
+  padding-bottom: 60px;
+  padding-top:20px;
+  height: 100%;
   img {
     width: 70px;
   }
@@ -189,14 +175,25 @@ export default {
     background: #dbf2ff;
   }
 }
+.app_info{
+	position:relative;
+	overflow:hidden;
+}
 .app_readme {
+	position:absolute;
+	top:0;
+	left:0;
   padding: 20px;
   margin-left: 5px;
   background: var(--primaryColor);
-  height: 95.5%;
+  height: 93%;
   width: 99%;
 }
 .app_website {
+	position:absolute;
+	top:0;
+	left:0;
+	  height: 93%;
   .website_navigator {
     padding: 2px;
     border-radius: 10px;
@@ -220,5 +217,8 @@ export default {
   h3 {
     font-size: 1.1rem;
   }
+}
+.metas {
+height:60%;
 }
 </style>

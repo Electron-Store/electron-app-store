@@ -30,8 +30,8 @@ var win;
 
 async function createWindow() {
 	win = new BrowserWindow({
-		width: screen.getPrimaryDisplay().bounds.width,
-		height: screen.getPrimaryDisplay().bounds.height,
+		width: screen.getPrimaryDisplay().bounds.width - 50,
+		height: screen.getPrimaryDisplay().bounds.height - 50,
 		frame: false,
 		webPreferences: {
 			nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
@@ -41,6 +41,7 @@ async function createWindow() {
 		title: "Electron Store",
 	});
 	app.setName("Electron Store");
+	win.maximize();
 	captureDownloadEvents(win);
 	if (process.env.WEBPACK_DEV_SERVER_URL) {
 		// Load the url of the dev server if in development mode
@@ -54,6 +55,13 @@ async function createWindow() {
 		e.preventDefault();
 		require("electron").shell.openExternal(url);
 	});
+	win.addEventListener("maximize",()=>{
+		win.webContents.send("windowIsMaximize",true)
+	})
+	win.addEventListener("move",()=>{
+		win.webContents.send("windowIsMaximize",false)
+	})
+
 }
 
 // Quit when all windows are closed.
@@ -76,7 +84,10 @@ app.on("activate", () => {
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
 	createWindow();
-	win.openDevTools();
+	if(isDevelopment){
+// 		win.openDevTools()
+	}
+
 });
 
 // Exit cleanly on request from parent process in development mode.
@@ -93,6 +104,27 @@ if (isDevelopment) {
 		});
 	}
 }
+
+ipcMain.on("windowAction",(e,action)=>{
+	console.log(action)
+    if(action=="close"){
+        app.quit()
+        return
+    }
+    if(action=="minimize"){
+        win.minimize()
+        return
+    }
+    if(action=="maximize"){
+        win.maximize()
+        return
+    }
+    if(action=="unmaximize"){
+		win.unmaximize()
+		win.center()
+		return
+	}
+})
 
 ipcMain.handle("sendSettings", async () => {
 	return await getSettings();

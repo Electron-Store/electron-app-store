@@ -1,7 +1,7 @@
 <template>
-  <div class="Settings page pt10">
-    <div class="w-100 flex center-a mt10">
-      <h1>Settings</h1>
+  <div class="Settings page">
+    <div class="w-100 flex center-a ">
+      <h2>Settings</h2>
     </div>
     <div class="grid4 align-top w-100 h-100">
       <div class="flex flex-col">
@@ -70,9 +70,13 @@ export default {
 </script>
 
 <style>
+.Settings{
+  	padding-top:30px;
+}
 .setting_box {
   margin: 10px;
   padding: 10px;
   max-width: 100%;
+
 }
 </style>
