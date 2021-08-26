@@ -128,7 +128,7 @@ export default {};
 @import url("../assets/styles/splash.css");
 .splash {
   position: fixed;
-  z-index: 10;
+  z-index: 60;
   width: 100vw;
   height: 100vh;
   top: 0;

@@ -1,6 +1,6 @@
 <template>
-  <div class="Settings page">
-    <div class="w-100 flex center-a">
+  <div class="Settings page pt10">
+    <div class="w-100 flex center-a mt10">
       <h1>Settings</h1>
     </div>
     <div class="grid4 align-top w-100 h-100">

@@ -40,7 +40,7 @@ export default {
 
 <style lang="scss">
 .shrink_container {
-  width: 70.5% !important;
+  width: 73% !important;
 }
 .page {
   width: 94.3%;

@@ -1,5 +1,5 @@
 <template>
-  <div class="loading_indicator pos-fix h-100 top0 flex center-a">
+  <div class="loading_indicator pos-fix h-100  flex center-a">
     <div class="lds-roller pos-rel z-index-3" v-if="internetIsLikelyOn">
       <div></div>
       <div></div>
@@ -43,9 +43,10 @@ export default {
 
 <style lang="scss">
 .loading_indicator {
-  z-index: 10;
+  z-index: 50;
   // background: rgba(0, 0, 0, 0.219);
-  right: 0px;
+  left:60px;
+  top:30px;
   width: 100%;
 }
 .lds-roller {

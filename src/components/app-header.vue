@@ -69,13 +69,20 @@ export default {
 </script>
 
 <style lang="scss">
+header:is(.shrink_container){
+      border-radius: 10px 10px 10px 10px;
+    button:{
+    border-radius:20px !important;
+    opacity:0;;
+    }
+}
 header {
   background: var(--primaryColor);
   width: 94.3%;
   overflow: hidden;
   border-radius: 10px 10px 0px 0px;
   left: 73px;
-  z-index: 2;
+  z-index: 10;
   top: 35px;
   transition: 0.2s ease-in-out;
   button {
@@ -111,5 +118,11 @@ header {
     width: 19px;
     opacity: 0.5;
   }
+}
+.shrink_container{
+#dls_bt{
+border-radius:10px;
+box-shadow:4px 4px 8px black;
+}
 }
 </style>

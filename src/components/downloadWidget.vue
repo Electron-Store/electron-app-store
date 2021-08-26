@@ -31,7 +31,7 @@ export default {
 <style lang="scss">
 .download_widget {
   position: fixed;
-  top: 5px;
+  top: 40px;
   right: 10px;
   height: 97.5vh;
   width: 300px;

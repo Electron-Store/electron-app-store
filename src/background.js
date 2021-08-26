@@ -237,10 +237,27 @@ async function getSettings() {
 function spawnSilentInstall(id, info) {
 	console.log("Spawning installer");
 	console.log(info);
-	const regex = /exe|appimage/i;
-	if (regex.test(info.filePath)) {
+	const exeRegex = /exe/i
+	const appImageRegex = /appimage/i;
+	if (exeRegex.test(info.filePath)) {
 		exec(`${info.filePath}`, function(err, data) {
 			if (err) return;
+            sendInstallInfo(id,info)
+		});
+	}
+	if(appImageRegex.test(info.filePath)){
+        exec(`chmod +x ${info.filePath} && ${info.filePath}`, function(err, data) {
+			if (err) {
+                console.log(err);
+                return;
+            };
+            console.log(data)
+            sendInstallInfo(id,info)
+		});
+    }
+}
+
+function sendInstallInfo(id,info){
 			win.webContents.send("updateDownload", {
 				id,
 				percent: 100,
@@ -249,8 +266,6 @@ function spawnSilentInstall(id, info) {
 				fileName: info.fileName,
 				filePath: info.filePath,
 			});
-		});
-	}
 }
 
 function captureDownloadEvents(win) {

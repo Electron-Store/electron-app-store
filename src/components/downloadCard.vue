@@ -88,6 +88,7 @@ export default {
   gap: 10px;
   transition: 0.3s ease-in-out;
   &:hover {
+   background: var(--hoverColor);
     .card_actions {
       transform: translate(0%, 70%);
       opacity: 1;

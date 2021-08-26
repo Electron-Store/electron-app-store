@@ -90,7 +90,7 @@ export default {
   height: 94vh;
   width: 60px;
   background: var(--primaryColor);
-  z-index: 4;
+  z-index: 40;
   transition: 0.2s ease-in-out;
 
   &:hover {
