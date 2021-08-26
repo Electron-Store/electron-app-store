@@ -29,7 +29,8 @@ A Cross Platform App Store for apps built with ElectronJs or just a gui client f
 ## Contributing
 
 Drop your pull requests. Am all for It. Lets have fun in building this project. 
-We can chat on Discussions Tab (Github Discussions)
+Join us on Discord here https://discord.gg/Vym5WyaQBf
+or on telegram here https://t.me/joinchat/nQ4nckbe-dM3ZDVk
 
 ## Why build this ?
 I love checking out new apps. So occasionally I visit  this page https://electronjs.org/apps to find out about new stuff.
