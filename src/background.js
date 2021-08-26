@@ -85,7 +85,7 @@ app.on("activate", () => {
 app.on("ready", async () => {
 	createWindow();
 	if(isDevelopment){
-// 		win.openDevTools()
+		win.openDevTools()
 	}
 
 });
