@@ -38,10 +38,8 @@ Just join us on **Telegram** by Clicking this [Link](https://t.me/joinchat/nQ4nc
 
 ### Discord
 Let's chat on **Discord** by Clicking the link:
-
-<p align="center">
-  <img src="https://invidget.switchblade.xyz/KTpDVBQcFq" alt="Discord Invite Link" title="Dicord Invite" onclick="window.location.href = 'https://discord.gg/KTpDVBQcFq'"/>
-</p>
+  
+  [![Join our Discord server!](https://invidget.switchblade.xyz/KTpDVBQcFq)](https://discord.gg/KTpDVBQcFq)
 
 ## Why build this ?
 I love checking out new apps. So occasionally I visit  this page https://electronjs.org/apps to find out about new stuff.
