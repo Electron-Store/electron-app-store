@@ -29,8 +29,19 @@ A Cross Platform App Store just for Electron Apps
 ## Contributing
 
 Drop your pull requests. We are all for It. Lets have fun in building this project. 
-Join us on Discord here https://discord.gg/Vym5WyaQBf  
-or on telegram here https://t.me/joinchat/nQ4nckbe-dM3ZDVk
+
+## Community
+You can join us on **Telegram** or **Discord**!
+
+### Telegram
+Just join us on **Telegram** by Clicking this [Link](https://t.me/joinchat/nQ4nckbe-dM3ZDVk)
+
+### Discord
+Let's chat on **Discord** by Clicking the link:
+
+<p align="center">
+  <img src="https://invidget.switchblade.xyz/KTpDVBQcFq" alt="Discord Invite Link" title="Dicord Invite"/>
+</p>
 
 ## Why build this ?
 I love checking out new apps. So occasionally I visit  this page https://electronjs.org/apps to find out about new stuff.
