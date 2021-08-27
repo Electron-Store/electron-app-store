@@ -40,7 +40,7 @@ Just join us on **Telegram** by Clicking this [Link](https://t.me/joinchat/nQ4nc
 Let's chat on **Discord** by Clicking the link:
 
 <p align="center">
-  <img src="https://invidget.switchblade.xyz/KTpDVBQcFq" alt="Discord Invite Link" title="Dicord Invite"/>
+  <img src="https://invidget.switchblade.xyz/KTpDVBQcFq" alt="Discord Invite Link" title="Dicord Invite" onclick="window.location.href = 'https://discord.gg/KTpDVBQcFq'"/>
 </p>
 
 ## Why build this ?
