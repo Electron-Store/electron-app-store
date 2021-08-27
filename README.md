@@ -1,7 +1,7 @@
 
 # The Electron App Store
 
-A Cross Platform App Store for apps built with ElectronJs or just a gui client for https://electronjs.org/apps
+A Cross Platform App Store just for Electron Apps
 
 
 ## Features
@@ -28,11 +28,11 @@ A Cross Platform App Store for apps built with ElectronJs or just a gui client f
 
 ## Contributing
 
-Drop your pull requests. Am all for It. Lets have fun in building this project. 
-Join us on Discord here https://discord.gg/Vym5WyaQBf
+Drop your pull requests. We are all for It. Lets have fun in building this project. 
+Join us on Discord here https://discord.gg/Vym5WyaQBf  
 or on telegram here https://t.me/joinchat/nQ4nckbe-dM3ZDVk
 
 ## Why build this ?
 I love checking out new apps. So occasionally I visit  this page https://electronjs.org/apps to find out about new stuff.
 After some time I just wished the website was an appstore and was like "Maybe I can convert to an store. Easy peezy, right?".
-And then after months of postponing this side project I decided to take a brake from building [FLB Music](https://github.com/Patrick-web/FLB-Music-Player-Official) and make it. And also because I love electronjs.
+And then after months of postponing this side project I decided to take a brake from building [FLB Music](https://github.com/Patrick-web/FLB-Music-Player-Official) and make it. And also because I love Electron.js.
