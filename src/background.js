@@ -1,5 +1,7 @@
 "use strict";
 
+import downloadsFolder from "downloads-folder";
+
 import {
 	app,
 	protocol,
@@ -21,7 +23,7 @@ const path = require("path");
 Menu.setApplicationMenu(null);
 autoUpdater.checkForUpdatesAndNotify();
 
-let downloadFolder = path.join(require("os").homedir(), "Downloads");
+let downloadFolder = downloadsFolder();
 
 protocol.registerSchemesAsPrivileged([
 	{ scheme: "app", privileges: { secure: true, standard: true } },

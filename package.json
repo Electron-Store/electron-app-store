@@ -29,7 +29,8 @@
 		"node-downloader-helper": "^1.0.18",
 		"vue": "^2.6.11",
 		"vue-router": "^3.2.0",
-		"vuex": "^3.4.0"
+		"vuex": "^3.4.0",
+		"downloads-folder": "latest"
 	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "~4.5.0",
