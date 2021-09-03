@@ -22,7 +22,7 @@ A Cross Platform App Store just for Electron Apps
 
 ## Roadmap
 - Install apps without spawning the installer modal
-- Support installation of Appimages
+- Support installation of Appimages ✔️
 - Create a CLI that has the same functionalty
 - Encourage a Common ReadMe format from the app developers to have the app pages look more seeamless
 - Support for Youtube preview videos shown on the website
