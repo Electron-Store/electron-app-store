@@ -1,5 +1,6 @@
-
 # The Electron App Store
+
+<img src="screenshots/repo-card.jpg" alt="Repo Card"/>
 
 A Cross Platform App Store just for Electron Apps
 
