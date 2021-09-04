@@ -27,6 +27,10 @@ A Cross Platform App Store just for Electron Apps
 - Encourage a Common ReadMe format from the app developers to have the app pages look more seeamless
 - Support for Youtube preview videos shown on the website
 
+## Installation
+You can download for your Platform by visiting our [website](https://electron-app-store.ml) or for Linux you can get the **Snap** from **Snapcraft**:
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/electron-store)
+
 ## Contributing
 
 Drop your pull requests. We are all for It. Lets have fun in building this project. 
