@@ -2,6 +2,7 @@
 	"name": "electron-store",
 	"productName": "Electron Store",
 	"appId": "electron-store",
+	"license": "MIT",
 	"author": {
 		"name": "Patrick Waweru",
 		"email": "pntxall100@gmail.com"
