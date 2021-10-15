@@ -1,48 +1,49 @@
 {
-	"name": "electron-store",
-	"productName": "Electron Store",
-	"appId": "electron-store",
-	"license": "MIT",
-	"author": {
-		"name": "Patrick Waweru",
-		"email": "pntxall100@gmail.com"
-	},
-	"description": "A Simple App Store for Apps Built with Electron",
-	"version": "0.0.3",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Patrick-web/electron-app-store.git"
-	},
-	"private": true,
-	"scripts": {
-		"web-serve": "vue-cli-service serve",
-		"web-build": "vue-cli-service build",
-		"build": "vue-cli-service electron:build",
-		"dev": "vue-cli-service electron:serve",
-		"postinstall": "electron-builder install-app-deps",
-		"postuninstall": "electron-builder install-app-deps"
-	},
-	"main": "background.js",
-	"dependencies": {
-		"core-js": "^3.6.5",
-		"electron-settings": "^4.0.2",
-		"electron-updater": "^4.3.9",
-		"node-downloader-helper": "^1.0.18",
-		"vue": "^2.6.11",
-		"vue-router": "^3.2.0",
-		"vuex": "^3.4.0",
-		"downloads-folder": "latest"
-	},
-	"devDependencies": {
-		"@vue/cli-plugin-babel": "~4.5.0",
-		"@vue/cli-plugin-router": "~4.5.0",
-		"@vue/cli-plugin-vuex": "~4.5.0",
-		"@vue/cli-service": "~4.5.0",
-		"electron": "^13.0.0",
-		"electron-devtools-installer": "^3.1.0",
-		"sass": "^1.26.5",
-		"sass-loader": "^8.0.2",
-		"vue-cli-plugin-electron-builder": "~2.1.1",
-		"vue-template-compiler": "^2.6.11"
-	}
+    "name": "electron-store",
+    "productName": "Electron Store",
+    "appId": "electron-store",
+    "license": "MIT",
+    "author": {
+        "name": "Electron Store Team",
+        "email": "info@electron-app-store.ml"
+    },
+    "description": "A Simple App Store for Apps Built with Electron",
+    "version": "0.0.4",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Electron-Store/electron-app-store.git"
+    },
+    "private": true,
+    "scripts": {
+        "web-serve": "vue-cli-service serve",
+        "web-build": "vue-cli-service build",
+        "build": "vue-cli-service electron:build",
+        "dev": "vue-cli-service electron:serve",
+        "postinstall": "electron-builder install-app-deps",
+        "postuninstall": "electron-builder install-app-deps"
+    },
+    "main": "background.js",
+    "dependencies": {
+        "core-js": "^3.18.3",
+        "downloads-folder": "latest",
+        "electron-settings": "^4.0.2",
+        "electron-updater": "^4.3.9",
+        "node-downloader-helper": "^1.0.19",
+        "vue": "^2.6.14",
+        "vue-router": "^3.5.2",
+        "vuex": "^3.6.2"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.14",
+        "@vue/cli-plugin-router": "~4.5.14",
+        "@vue/cli-plugin-vuex": "~4.5.14",
+        "@vue/cli-service": "~4.5.14",
+        "electron": "^15.2.0",
+        "electron-devtools-installer": "^3.2.0",
+        "sass": "^1.43.2",
+        "sass-loader": "^10",
+        "vue-cli-plugin-electron-builder": "~2.1.1",
+        "vue-template-compiler": "^2.6.14",
+        "webpack": "^5.58.2"
+    }
 }
