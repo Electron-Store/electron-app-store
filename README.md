@@ -1,10 +1,10 @@
 # The Electron App Store
-
 <img src="screenshots/repo-card.jpg" alt="Repo Card"/>
+<a href="https://www.producthunt.com/posts/electron-app-store?utm_source=badge-review&utm_medium=badge&utm_souce=badge-electron-app-store#discussion-body" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/review.svg?post_id=316563&theme=dark" alt="Electron App Store - A Cross-Platform Open-Source App Store for Electron.js Apps | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://www.producthunt.com/posts/electron-app-store?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-electron-app-store" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=316563&theme=dark" alt="Electron App Store - A cross platform, open source app store for Electron.js apps | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
-A Cross Platform App Store just for Electron Apps
-
-
+A Cross Platform App Store just for Electron Apps  
 ## Features
 - Browse Apps from 10+  Categories
 - Search for apps by keyword and app name
@@ -28,7 +28,7 @@ A Cross Platform App Store just for Electron Apps
 - Support for Youtube preview videos shown on the website
 
 ## Installation
-You can download for your Platform by visiting our [website](https://electron-app-store.ml) or for Linux you can get the **Snap** from **Snapcraft**:
+You can download for your Platform by visiting our [website](https://electron-app-store.ml) or for Linux you can get the **Snap** from **Snapcraft**:  
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/electron-store)
 
 ## Contributing
@@ -42,10 +42,7 @@ You can join us on **Telegram** or **Discord**!
 Just join us on **Telegram** by Clicking this [Link](https://t.me/joinchat/nQ4nckbe-dM3ZDVk)
 
 ### Discord
-Let's chat on **Discord** by Clicking the link:
-  
-  [![Join our Discord server!](https://invidget.switchblade.xyz/KTpDVBQcFq)](https://discord.gg/KTpDVBQcFq)
-
+Let's chat on **Discord** by Clicking this [link](https://discord.gg/Hdgcqq9C)!
 ## Why build this ?
 I love checking out new apps. So occasionally I visit  this page https://electronjs.org/apps to find out about new stuff.
 After some time I just wished the website was an appstore and was like "Maybe I can convert to an store. Easy peezy, right?".
