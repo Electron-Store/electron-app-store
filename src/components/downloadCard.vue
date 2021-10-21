@@ -24,17 +24,32 @@
       v-if="download.percent < 100"
       class="card_actions round10 flex center-a"
     >
-      <button v-if="download.state === 'Downloading'" @click="pause">
+      <button
+        v-if="download.state === 'Downloading'"
+        title="Pause"
+        @click="pause"
+      >
         <img class="icon" src="@/assets/images/pause.svg" alt="" />
       </button>
-      <button @click="resume" v-if="download.state === 'Paused'">
+      <button @click="resume" title="Resume" v-if="download.state === 'Paused'">
         <img class="icon" src="@/assets/images/play.svg" alt="" />
       </button>
-      <button @click="cancel" v-if="download.state === 'Downloading'">
+      <button
+        @click="cancel"
+        title="Cancel"
+        v-if="download.state === 'Downloading'"
+      >
         <img class="icon" src="@/assets/images/x.svg" alt="" />
       </button>
-      <button @click="retry" v-if="download.state === 'Canceled'">
+      <button title="Retry" @click="retry" v-if="download.state === 'Canceled'">
         <img class="icon" src="@/assets/images/retry.svg" alt="" />
+      </button>
+      <button
+        title="Remove"
+        @click="remove"
+        v-if="download.state === 'Canceled'"
+      >
+        <img class="icon" src="@/assets/images/trash.svg" alt="" />
       </button>
     </div>
     <div
@@ -50,8 +65,10 @@
 
 <script>
 import { ipcRenderer } from "electron";
+import { mapMutations } from "vuex";
 export default {
   methods: {
+    ...mapMutations(["removeDownload"]),
     pause() {
       ipcRenderer.send("pause", this.download.id);
     },
@@ -63,6 +80,9 @@ export default {
     },
     retry() {
       ipcRenderer.send("retry", this.download.id);
+    },
+    remove() {
+      this.removeDownload(this.download.id);
     },
     openFileLocation() {
       ipcRenderer.send("openFileLocation", this.download.filePath);
@@ -88,8 +108,11 @@ export default {
   gap: 10px;
   transition: 0.3s ease-in-out;
   &:hover {
-   background: var(--hoverColor);
+    .file_type {
+      filter: invert(1);
+    }
     .card_actions {
+      background: var(--primaryColor);
       transform: translate(0%, 70%);
       opacity: 1;
     }
@@ -115,7 +138,7 @@ export default {
 
 .card_actions {
   background: var(--primaryColor);
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.055);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.123);
   position: absolute;
   bottom: 0%;
   right: 10px;
@@ -123,6 +146,7 @@ export default {
   transform: translate(0%, 100%);
   opacity: 0;
   transition: 0.3s ease-in-out;
+  z-index: 3;
   button {
     background: none;
     padding: 10px;

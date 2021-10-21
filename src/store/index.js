@@ -90,7 +90,7 @@ export default new Vuex.Store({
 			state.downloads = payload;
 		},
 		addToDownloads(state, payload) {
-			state.downloads.push(payload);
+			state.downloads.unshift(payload);
 		},
 		updateDownload(state, payload) {
 			const index = state.downloads.findIndex((d) => d.id === payload.id);
@@ -104,6 +104,11 @@ export default new Vuex.Store({
 		updateDownloadState(state, payload) {
 			const index = state.downloads.findIndex((d) => d.id === payload.id);
 			state.downloads[index].state = payload.state;
+		},
+		removeDownload(state, payload) {
+			const index = state.downloads.findIndex((d) => d.id === payload);
+			state.downloads.splice(index, 1);
+			saveData(state.downloads);
 		},
 		setSettings(state, payload) {
 			state.settings = payload;

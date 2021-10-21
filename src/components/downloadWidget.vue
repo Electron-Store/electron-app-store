@@ -33,7 +33,7 @@ export default {
   position: fixed;
   top: 40px;
   right: 10px;
-  height: 97.5vh;
+  height: 93vh;
   width: 300px;
   background: var(--primaryColor);
   z-index: 4;

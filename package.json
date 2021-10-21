@@ -15,6 +15,7 @@
 	},
 	"private": true,
 	"scripts": {
+		"start": "vue-cli-service electron:serve",
 		"web-serve": "vue-cli-service serve",
 		"web-build": "vue-cli-service build",
 		"build": "vue-cli-service electron:build",
