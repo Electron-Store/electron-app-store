@@ -4,8 +4,8 @@
 	"appId": "electron-store",
 	"license": "MIT",
 	"author": {
-		"name": "Patrick Waweru",
-		"email": "pntxall100@gmail.com"
+		"name": "Electron Store Team",
+		"email": "info@electron-app-store.ml"
 	},
 	"description": "A Simple App Store for Apps Built with Electron",
 	"version": "0.0.4",
