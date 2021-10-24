@@ -2,8 +2,8 @@
 	"name": "electron-store",
 	"license": "MIT",
 	"author": {
-		"name": "Patrick Waweru",
-		"email": "pntxall100@gmail.com"
+		"name": "Electron Store Team",
+		"email": "info@electron-app-store.ml"
 	},
 	"description": "A Simple App Store for Apps Built with Electron",
 	"version": "0.0.4",
@@ -21,25 +21,25 @@
 	},
 	"main": "background.js",
 	"dependencies": {
-		"core-js": "^3.6.5",
+		"core-js": "^3.18.3",
+		"downloads-folder": "latest",
 		"electron-settings": "^4.0.2",
 		"electron-updater": "^4.3.9",
-		"node-downloader-helper": "^1.0.18",
-		"vue": "^2.6.11",
-		"vue-router": "^3.2.0",
-		"vuex": "^3.4.0",
-		"downloads-folder": "latest"
+		"node-downloader-helper": "^1.0.19",
+		"vue": "^2.6.14",
+		"vue-router": "^3.5.2",
+		"vuex": "^3.6.2"
 	},
 	"devDependencies": {
-		"@vue/cli-plugin-babel": "~4.5.0",
-		"@vue/cli-plugin-router": "~4.5.0",
-		"@vue/cli-plugin-vuex": "~4.5.0",
-		"@vue/cli-service": "~4.5.0",
-		"electron": "^13.0.0",
-		"electron-devtools-installer": "^3.1.0",
-		"sass": "^1.26.5",
-		"sass-loader": "^8.0.2",
+		"@vue/cli-plugin-babel": "~4.5.14",
+		"@vue/cli-plugin-router": "~4.5.14",
+		"@vue/cli-plugin-vuex": "~4.5.14",
+		"@vue/cli-service": "~4.5.14",
+		"electron": "^15.3.0",
+		"electron-devtools-installer": "^3.2.0",
+		"sass": "^1.43.3",
+		"sass-loader": "^10",
 		"vue-cli-plugin-electron-builder": "~2.1.1",
-		"vue-template-compiler": "^2.6.11"
+		"vue-template-compiler": "^2.6.14"
 	}
 }
