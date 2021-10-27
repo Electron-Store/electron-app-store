@@ -20,7 +20,7 @@ const { DownloaderHelper } = require("node-downloader-helper");
 const isDevelopment = process.env.NODE_ENV !== "production";
 // const path = require("path");
 
-Menu.setApplicationMenu(null);
+// Menu.setApplicationMenu(null);
 autoUpdater.checkForUpdatesAndNotify();
 
 let downloadFolder = downloadsFolder();
@@ -34,7 +34,7 @@ async function createWindow() {
     win = new BrowserWindow({
         width: screen.getPrimaryDisplay().bounds.width - 50,
         height: screen.getPrimaryDisplay().bounds.height - 50,
-        frame: false,
+        // frame: false,
         webPreferences: {
             nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
             contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
