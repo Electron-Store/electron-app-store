@@ -11,27 +11,6 @@ module.exports = {
                     owner: "Electron-Store",
                     repo: "electron-app-store",
                 }],
-                mac: {
-                    target: [{
-                        target: "dmg",
-                        arch: ["universal"]
-                    }]
-                },
-                linux: {
-                    target: [{
-                            target: "AppImage",
-                            arch: ['x64']
-                        },
-                        {
-                            target: "deb",
-                            arch: ['x64']
-                        },
-                        {
-                            target: "rpm",
-                            arch: ['x64']
-                        },
-                    ],
-                },
                 snap: {
                     title: "Electron Store",
                     confinement: "classic",

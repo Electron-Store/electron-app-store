@@ -1,6 +1,5 @@
 <template>
   <div :class="[settings.darkMode ? 'darkMode' : '', 'app']" id="app">
-    <app-bar />
     <loading v-if="loading" />
     <app-header />
     <base-menu />
@@ -27,14 +26,13 @@ import BaseMenu from "./components/base-menu.vue";
 import DownloadWidget from "./components/downloadWidget.vue";
 import Loading from "./components/loading.vue";
 import Splash from "./components/splash.vue";
-import AppBar from "./components/app-bar.vue";
 export default {
   data() {
     return {
       showSplash: true,
     };
   },
-  components: { BaseMenu, Loading, AppHeader, Splash, DownloadWidget, AppBar },
+  components: { BaseMenu, Loading, AppHeader, Splash, DownloadWidget},
   computed: {
     ...mapState(["loading", "showDownloadWidget", "settings"]),
   },
