@@ -36,7 +36,7 @@ A Cross Platform App Store just for Electron Apps
 - Online preview of Apps and an option to open it in the App Store
 
 ## Installation
-You can download for your Platform by visiting our [website](https://electron-app-store.ml) or for Linux you can get the **Snap** from **Snapcraft**:  
+You can download for your Platform by visiting our [website](https://electron-store.org) or for Linux you can get the **Snap** from **Snapcraft**:  
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/electron-store)
 
 ## Contributing
@@ -51,7 +51,3 @@ Just join us on **Telegram** by Clicking this [Link](https://t.me/joinchat/nQ4nc
 
 ### Discord
 Let's chat on **Discord** by Clicking this [link](https://discord.gg/Hdgcqq9C)!
-## Why build this ?
-I love checking out new apps. So occasionally I visit  this page https://electronjs.org/apps to find out about new stuff.
-After some time I just wished the website was an appstore and was like "Maybe I can convert to an store. Easy peezy, right?".
-And then after months of postponing this side project I decided to take a brake from building [FLB Music](https://github.com/Patrick-web/FLB-Music-Player-Official) and make it. And also because I love Electron.js.
