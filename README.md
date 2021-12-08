@@ -10,10 +10,10 @@ A Cross Platform App Store just for Electron Apps
 - Track progress, pause, cancel, delete (canceled only) downloads
 - Browse Apps from 10+  Categories
 - Search for apps by keyword and app name
-- Download .exe , .appimage ,.dmg and other file formats
+- Download .exe, .appimage, .dmg and other file formats
 - Automatic Install for .exe files
 - Automatic Run for .AppImage files (for Linux only)
-- Loads the app website if the ReadMe is absent for the app page
+- Loads the app website if the Readme is absent for the app page
 - Download from App Website if no binary is present (only if direct download button is located at the website)
 - Is dark mode a Feature?
 
