@@ -500,7 +500,7 @@
 }
 
 .top0 {
-	top: 0px;
+	top: 0;
 }
 .top5 {
 	top: 5px;
@@ -525,7 +525,7 @@
 }
 
 .bottom0 {
-	bottom: 0px;
+	bottom: 0;
 }
 .bottom5 {
 	bottom: 5px;
@@ -550,7 +550,7 @@
 }
 
 .left0 {
-	left: 0px;
+	left: 0;
 }
 .left5 {
 	left: 5px;
@@ -575,7 +575,7 @@
 }
 
 .right0 {
-	right: 0px;
+	right: 0;
 }
 .right5 {
 	right: 5px;
