@@ -1,28 +1,26 @@
 name: Build Release
 
-on: 
+on:
   workflow_dispatch
 
 jobs:
   release:
     name: Release App
     runs-on: macos-latest
-
     steps:
       - name: Clone Repo
         run: git clone https://github.com/Electron-Store/electron-app-store
-
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 1
 
       - name: Install RPM with Homebrew
         run: brew install rpm
-        
+
       - name: Install Yarn
         run: npm i -g yarn@latest
-      
+
       - name: Install Dependencies and Build App
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
